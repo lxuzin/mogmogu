@@ -1,6 +1,4 @@
 ## 브런치
 
-/backend
-
-​	/user
+Default : main
 
