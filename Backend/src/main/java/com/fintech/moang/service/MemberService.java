@@ -20,6 +20,7 @@ public class MemberService {
         Member member = new Member();
         member.setName(joinInfo.getName());
         member.setPassword(passwordEncoder.encode(joinInfo.getPassword()));
+        member.setRoles("ROLE_MEMBER");
         memberRepository.save(member);
         return true;
     }
