@@ -1,16 +1,20 @@
 'use client'
-import React from 'react'
-import MoangCalendar from './Components/MoangCalendar'
-import Styles from './calendar.module.css'
+import { useState } from 'react'
+import Calendar from "react-calendar";
+import Styles from './Calendar.module.css'
+import "./MoangCalendar.css";
 
 export default function CalendarPage() {
+  const [value, onChange] = useState(new Date());
   return (
     <div className={Styles.calendarWrapper}>
-      <div className={Styles.calendar}>
-        <MoangCalendar />
-      </div>
+      <Calendar
+        onChange={onChange}
+        value={value}
+        locale="en-US"
+      />
       <div className={Styles.reminder}>
-        123
+        {value.toString()}
       </div>
     </div>
   )

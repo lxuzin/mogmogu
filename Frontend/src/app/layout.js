@@ -3,6 +3,7 @@ import './globals.css'
 import { Nanum_Gothic_Coding } from 'next/font/google'
 import Style from "./page.module.css";
 import { GlobalContextProvider } from './Context/store';
+import { useRouter, useParams } from 'next/navigation'
 
 const inter = Nanum_Gothic_Coding({
   subsets: ['latin'],
@@ -23,14 +24,17 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
+  // get currunt param
   return (
     <html lang="en">
       <body className={inter.className}>
-          <div className={Style.root}>{children}</div>
-        <GlobalContextProvider>
-          <BottomNavBar />
-        </GlobalContextProvider>
+        <div className={Style.root}>
+          <GlobalContextProvider>
+            {children}
+            <BottomNavBar />
+          </GlobalContextProvider>
+        </div>
       </body>
-    </html>
+    </html >
   )
 }

@@ -2,5 +2,5 @@
   height: 100vh;
   width: 100%;
   display: grid;
-  grid-template-columns: 100% 80px;
+  grid-template-rows: calc(100% - 60px) 60px;
 }
