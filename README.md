@@ -1,4 +1,9 @@
-## 브런치
+## 모앙
 
-main : Defalut
+```
+npm install 
 
+하고!!!!
+
+npm run dev
+```
