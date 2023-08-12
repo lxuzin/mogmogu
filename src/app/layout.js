@@ -3,7 +3,6 @@ import './globals.css'
 import { Nanum_Gothic_Coding } from 'next/font/google'
 import Style from "./page.module.css";
 import { GlobalContextProvider } from './Context/store';
-import { useRouter, useParams } from 'next/navigation'
 
 const inter = Nanum_Gothic_Coding({
   subsets: ['latin'],

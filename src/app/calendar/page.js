@@ -5,7 +5,7 @@ import Styles from './Calendar.module.css'
 import "./MoangCalendar.css";
 
 export default function CalendarPage() {
-  const [value, onChange] = useState(new Date());
+  const [value, onChange] = useState(1692000000000);
   return (
     <div className={Styles.calendarWrapper}>
       <Calendar

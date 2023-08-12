@@ -1,8 +1,10 @@
-## 브런치
+## 모앙
 
-Default : main
 
-Backend : backend
+```
+npm install 
 
-* /member
-* /
+하고!!!!
+
+npm run dev
+```

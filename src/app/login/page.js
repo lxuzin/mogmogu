@@ -26,7 +26,7 @@ export default function Login(props) {
             router.push("login/join1")
           }}>회원가입</button>
         </div>
-        <h1><Link href="/">홈 화면으로 가기</Link></h1>
+        <h1><Link href="/home">홈 화면으로 가기</Link></h1>
 
       </div>
       <style jsx>
