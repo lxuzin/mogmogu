@@ -1,12 +1,10 @@
-import Link from "next/link";
+import { redirect } from 'next/navigation'
 
-export default function Home() {
+export default function Index() {
+  redirect('/login')
   return (
-    <>
-      <h1>Home Page</h1>
-      <h1><Link href="/login">로그인 화면으로 가기</Link></h1>
-        <br></br>
-    </>
-
+    <div id="root">
+      <h1>Index</h1>
+    </div>
   )
 }

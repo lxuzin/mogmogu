@@ -10,16 +10,20 @@ export default function Login(props) {
         <div className="loginImage"><img src="/login/whiteHeartLogo.png" alt="#" /></div>
         <div className="loginImage"><img src="/login/profileLogo.png" alt="#" /></div>
         <form className="loginForm" action="">
-          <input className="loginIdPassword" type="text" name="nickname" placeholder="아이디" />
-          <input className="loginIdPassword" type="password" name="password" placeholder="비밀번호" />
-          <input className="loginBtn" type="submit" value="로그인" />
+          <input className="loginIdPassword" type="text" name="nickname" placeholder="아이디" autoComplete='off' />
+          <input className="loginIdPassword" type="password" name="password" placeholder="비밀번호" autoComplete='off' />
+          <button className="loginBtn" onClick={(e) => {
+            e.preventDefault();
+            router.push("/")
+          }}>로그인</button>
         </form>
 
         <div>
           <button className="loginBottomBtn">아이디찾기</button>
           <button className="loginBottomBtn">비밀번호 찾기</button>
-          <button className="loginBottomBtn" onClick={() => {
-            router.push("/join1")
+          <button className="loginBottomBtn" onClick={(e) => {
+            e.preventDefault();
+            router.push("login/join1")
           }}>회원가입</button>
         </div>
         <h1><Link href="/">홈 화면으로 가기</Link></h1>
@@ -63,7 +67,7 @@ export default function Login(props) {
           color: white;
           justify-content: center;
           align-items: center;
-          border-style: none;
+          border-style: none; 
         }
         
         .loginForm {

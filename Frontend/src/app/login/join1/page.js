@@ -8,43 +8,45 @@ export default function Join1(props) {
     <>
       <div className="joinbody">
         <div className="jointopbar">회원가입</div>
-        <div className="joinLogoImg"><img src="/join/pingHeartLogo.png" alt="#" /></div>
-        {/* 바뀌는 부분만 css추가 */}
-        <div className="joinUp">
-          <div className="joinborderbar">
-            <div className="joinProfImg"><img src="/join/profileSample.png" alt="#" /></div>
-            <button className="joinCameraBtn">
-              <img src="/join/cameraBtn.png" alt="" />
-            </button>
+        <div className="formWrapper">
+          <div className="joinLogoImg"><img src="/join/pingHeartLogo.png" alt="#" /></div>
+          {/* 바뀌는 부분만 css추가 */}
+          <div className="joinUp">
+            <div className="joinborderbar">
+              <div className="joinProfImg"><img src="/join/profileSample.png" alt="#" /></div>
+              <button className="joinCameraBtn">
+                <img src="/join/cameraBtn.png" alt="" />
+              </button>
+            </div>
           </div>
-        </div>
-        <div className="joinDown">
-          <form className="joinForm" action="">
-            <div className="joinFormOne">
-              <label className="joinLabel" htmlFor="username">이름 </label><br />
-              <input className="joinInput" type="text" id="username" name="username" /><br />
-            </div>
-            <div className="joinFormOne">
-              <label className="joinLabel" htmlFor="birthday">생년월일 </label><br />
-              <input className="joinInput" type="password" id="birthday" name="birthday" /><br />
-            </div>
-            <div className="joinFormOne">
-              <label className="joinLabel" htmlFor="phone">전화번호 </label><br />
-              <input className="joinInput" type="password" id="phone" name="phone" /><br />
-            </div>
-            <div className="joinFormOne">
-              <label className="joinLabel" htmlFor="nickname">아이디 </label><br />
-              <input className="joinInput" type="password" id="nickname" name="nickname" /><br />
-            </div>
-            <div className="joinFormOne">
-              <label className="joinLabel" htmlFor="password">비밀번호 </label><br />
-              <input className="joinInput" type="password" id="password" name="password" /><br />
-            </div>
-          </form>
+          <div className="joinDown">
+            <form className="joinForm" action="">
+              <div className="joinFormOne">
+                <label className="joinLabel" htmlFor="username">이름 </label><br />
+                <input className="joinInput" type="text" id="username" name="username" autoComplete='off' /><br />
+              </div>
+              <div className="joinFormOne">
+                <label className="joinLabel" htmlFor="birthday">생년월일 </label><br />
+                <input className="joinInput" type="password" id="birthday" name="birthday" autoComplete='off' /><br />
+              </div>
+              <div className="joinFormOne">
+                <label className="joinLabel" htmlFor="phone">전화번호 </label><br />
+                <input className="joinInput" type="password" id="phone" name="phone" autoComplete='off' /><br />
+              </div>
+              <div className="joinFormOne">
+                <label className="joinLabel" htmlFor="nickname">아이디 </label><br />
+                <input className="joinInput" type="password" id="nickname" name="nickname" autoComplete='off' /><br />
+              </div>
+              <div className="joinFormOne">
+                <label className="joinLabel" htmlFor="password">비밀번호 </label><br />
+                <input className="joinInput" type="password" id="password" name="password" autoComplete='off' /><br />
+              </div>
+            </form>
+          </div>
         </div>
         <div className="joinBtnDiv">
           <button className="joinBtn" type="submit" onClick={() => {
-            router.push("/join2")
+            router.push("/login/join2")
           }}>다음</button>
           <button className="joinBtn" type="submit" onClick={() => {
             router.push("/login")
@@ -56,6 +58,9 @@ export default function Join1(props) {
         .joinbody {
           background-color: white;
           height : 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
         }
         
         .joinUp {
@@ -123,6 +128,7 @@ export default function Join1(props) {
         }
         
         .joinFormOne {
+          margin-top : 20px;
           border-bottom: solid 1px;
         }
         
@@ -135,7 +141,7 @@ export default function Join1(props) {
           color: black;
           border: none;
           width: 100%;
-        margin-top : 5px;
+          margin-top : 5px;
         
         }
         /* bottom 공유 */
@@ -143,9 +149,7 @@ export default function Join1(props) {
           text-align: center;
           margin-top : 15px;
           width: 100%;
-          position: absolute; 
-          bottom :0;
-          margin-bottom: 10px;
+          margin-bottom: 30px;
         }
         
         .joinBtn {
@@ -154,7 +158,6 @@ export default function Join1(props) {
           border-color: white;
           border-radius: 5px;
           width: 90%;
-        
         }
       `}</style>
     </>

@@ -8,6 +8,7 @@ export default function Join2(props) {
     <>
       <div className="joinbody">
         <div className="jointopbar">회원가입</div>
+        <div className="formWrapper">
         <div className="joinLogoImg"><img src="/join/pingHeartLogo.png" alt="#" /></div>
         {/* 바뀌는 부분만 css추가 */}
         <div className="joinConnectDiv">
@@ -21,13 +22,14 @@ export default function Join2(props) {
           <div className="joinYourConnect">
             <label className="joinYourConnectLabel" htmlFor="yourCode">상대방 커플연결 코드</label><br />
             <input className="joinYourConnectInput" type="text" id="yourCode" name="yourCode" defaultValue=""
-              placeholder="상대방 코드를 입력해주세요." />
+              autoComplete='off' placeholder="상대방 코드를 입력해주세요." />
             <br />
           </div>
         </div>
+        </div>
         <div className="joinBtnDiv">
           <button className="joinBtn" type="submit" onClick={() => {
-            router.push("/")
+            router.push("/home")
           }}>전송</button>
           <button className="joinBtn" type="submit" onClick={() => {
             router.push("/login")
@@ -38,7 +40,10 @@ export default function Join2(props) {
         {`
         .joinbody {
           background-color: white;
-          height : 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
         }
 
         .jointopbar {
@@ -131,9 +136,7 @@ export default function Join2(props) {
           text-align: center;
           margin-top : 15px;
           width: 100%;
-          position: absolute; 
-          bottom :0;
-          margin-bottom: 10px;
+          margin-bottom: 30px;
         }
 
         .joinBtn {
