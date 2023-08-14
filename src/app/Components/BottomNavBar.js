@@ -1,5 +1,3 @@
-'use client'
-
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
@@ -11,13 +9,11 @@ import Tune from '@mui/icons-material/Tune';
 import { colors } from '@mui/material';
 import { useGlobalContext } from '../Context/store';
 import { useRouter, usePathname } from 'next/navigation';
-import { useState } from 'react';
 import { Key } from '@mui/icons-material';
 
 export const BottomNavBar = () => {
   const router = useRouter();
   const { navIdx, setNavIdx } = useGlobalContext();
-  const [path, setPath] = useState(usePathname());
 
   const changeActiveColor = (index) => {
     if (index === navIdx)
