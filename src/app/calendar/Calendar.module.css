@@ -1,11 +1,66 @@
 .calendarWrapper {
   height: 100%;
   background-color: aquamarine;
-  display: grid;
-  grid-template-rows: 80% 20%;
+  /* display: grid; */
+  /* grid-template-rows: 80% 20%; */
 }
 
-.reminder {
+.calendar {
+  background: linear-gradient(0deg, #ddd 0%, #fff 1%);
+  height: 600px;
+}
+
+.details {
+  height: calc(100% - 600px);
   width: 100%;
-  background-color: brown;
+  background: linear-gradient(180deg, #ddd 0%, #fff 5%);
+  padding: 25px;
+}
+
+.dateInfo {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  margin: 0 0 10px 0;
+}
+
+.dateSelected {
+  margin: 0 15px 0 0;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.d_day {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+  color: #999;
+}
+
+.addButton {
+  position: fixed;
+  bottom: 20vh;
+  right: 20px;
+  background-color: #C998DC;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 32px;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+  padding: 0 0 4px 0;
+}
+
+.detailTitle {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.detailDate {
+  margin: 5px 0 0 0;
+  font-size: 14px;
+  color: #999;
 }

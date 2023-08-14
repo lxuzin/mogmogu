@@ -1,36 +1,30 @@
+'use client'
 import { BottomNavBar } from './Components/BottomNavBar'
 import './globals.css'
-import { Nanum_Gothic_Coding } from 'next/font/google'
 import Style from "./page.module.css";
-import { GlobalContextProvider } from './Context/store';
-
-const inter = Nanum_Gothic_Coding({
-  subsets: ['latin'],
-  weight: '700'
-})
-
-export const metadata = {
-  title: '모앙',
-  description: 'Moang',
-  manifest: '/manifest.json',
-  themeColor: '#fff',
-  icon: {
-    src: '/assets/icons/icon-192x192',
-    sizes: [192, 256, 384, 512],
-    type: 'image/png',
-    purpose: 'any maskable',
-  },
-}
+import { GlobalContextProvider, useGlobalContext } from './Context/store';
+import { useRouter } from 'next/navigation';
 
 export default function RootLayout({ children }) {
-  // get currunt param
+  const router = useRouter();
+  const showNav = router.pathname === '/login' ? false : true;
+
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <head>
+        <title>모앙</title>
+        <meta name="description" content="Moang" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/assets/icons/icon-192x192.png" />
+        <link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:700&display=swap" />
+      </head>
+      <body>
         <div className={Style.root}>
           <GlobalContextProvider>
             {children}
-            <BottomNavBar />
+            {showNav && <BottomNavBar/>}
           </GlobalContextProvider>
         </div>
       </body>
