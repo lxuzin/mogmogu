@@ -2,5 +2,6 @@
   height: 100vh;
   width: 100%;
   display: grid;
-  grid-template-rows: calc(100% - 60px) 60px;
+  grid-template-rows: calc(100% - 56px) 56px;
+  overflow: hidden;
 }
