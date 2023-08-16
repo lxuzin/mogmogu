@@ -18,7 +18,6 @@ export default function RootLayout({ children }) {
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/assets/icons/icon-192x192.png" />
         <link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:700&display=swap" />
       </head>
       <body>
         <div className={Style.root}>

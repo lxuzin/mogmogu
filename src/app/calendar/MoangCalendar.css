@@ -165,6 +165,16 @@ react-calendar__month-view__days__day--neighboringMonth */
   /* background: #a9d4ff; */
 }
 
+.react-calendar__tile abbr {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -5px;
+}
+
 .react-calendar__tile--active abbr{
   background: #C998DC50;
   width: 30px;
@@ -173,6 +183,7 @@ react-calendar__month-view__days__day--neighboringMonth */
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.5s;
 }
 
 .react-calendar__tile--active:enabled:hover,

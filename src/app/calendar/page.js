@@ -1,95 +1,94 @@
 'use client'
-import { useState } from 'react'
-// import Calendar from "react-calendar";
+import { useEffect, useState } from 'react'
+import Calendar from "react-calendar";
 import Styles from './Calendar.module.css'
 import "./MoangCalendar.css";
-import dynamic from 'next/dynamic'
 import CalendarContent from './Components/CalendarContent';
+import { useRouter } from 'next/navigation';
+import { formatDate, handleDday, week } from './Utils/calendar-utils';
+import { useGlobalContext } from '../Context/store';
 
-const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
+// import dynamic from 'next/dynamic'
+// const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
 
 export default function CalendarPage() {
-  const [dateSelected, setDateSelected] = useState(new Date().toDateString());
+  const router = useRouter();
+  const { setNavIdx, calendarContents } = useGlobalContext();
+
+  const [today, setToday] = useState(new Date());
+  const [dateSelected, setDateSelected] = useState(today);
+  const [detail, setDetail] = useState(calendarContents.find(x => {
+    return x.startDate.toDateString() === today.toDateString();
+  }));
+
+  useEffect(() => {
+    setNavIdx(1);
+    setDetail(calendarContents.find(x => {
+      return x.startDate.toDateString() === dateSelected.toDateString();
+    }));
+  }, [today, dateSelected])
 
   const handleTileContent = ({ date, view }) => {
     if (view !== 'month')
       return null;
 
-    const content = contents.find(x => x.date.toDateString() === date.toDateString());
+    const content = calendarContents.find(x => formatDate(x.startDate) === formatDate(date));
     if (!content)
       return null;
     return (
       <CalendarContent
         cost={content.cost}
-        content={content.content}
+        keyword={content.keyword}
       />
     );
   }
 
-  const handleDday = () => {
-    const today = new Date();
-    const gap = new Date(dateSelected).getTime() - today.getTime();
-    const result = Math.ceil(gap / (1000 * 60 * 60 * 24));
-    if (result === 0)
-      return '오늘';
-    if (result > 0)
-      return `${result}일 후`;
-    if (result < 0)
-      return `${Math.abs(result)}일 전`;
+  const getShortDate = (date) => {
+    return `${date.getMonth() + 1}.${date.getDate()} ${week[date.getDay()]}`;
   }
 
-  const handleDetailContent = () => {
-    const res = contents.find(x => new Date(x.date).toDateString() == new Date(dateSelected).toDateString());
-    if (!res)
-      return null;
-    console.log(res);
-    const content = "월급날";
-    const date = "8.24 목 - 8.26 토";
-    return (
-      <div className={Styles.detailContent}>
-        <div className={Styles.detailTitle}>{res.content}</div>
-        <div className={Styles.detailDate}>{date}</div>
-      </div>
-    )
+  const getDetailPeriod = (startDate, endDate) => {
+    if (startDate.toDateString() === endDate.toDateString())
+      return getShortDate(startDate);
+    return `${getShortDate(startDate)} - ${getShortDate(endDate)}`;
   }
-
 
   return (
     <div className={Styles.calendarWrapper}>
       <Calendar
         tileContent={handleTileContent}
+        next2Label={null}
+        prev2Label={null}
+        formatMonthYear={(locale, date) => `${date.getFullYear()}년 ${date.getMonth() + 1}월`}
+        formatMonth={(locale, date) => `${date.getMonth() + 1}월`}
+        formatShortWeekday={(locale, date) => week[date.getDay()]}
+        onClickDay={setDateSelected}
         className={Styles.calendar}
-        onChange={setDateSelected}
         value={dateSelected}
-        locale='ko-KR'
-        formatDay={(locale, date) => date.toLocaleDateString('en-US', { day: 'numeric' })}
+        locale='en-US'
       />
+
       <div className={Styles.details}>
         <div className={Styles.dateInfo}>
           <div className={Styles.dateSelected}>{new Date(dateSelected).getDate()}</div>
-          <div className={Styles.d_day}>{handleDday()}</div>
+          <div className={Styles.d_day}>{handleDday(dateSelected)}</div>
         </div>
-        <div className={Styles.addButton}>+</div>
-        {handleDetailContent()}
+        <button
+          className={Styles.addButton}
+          onClick={() => router.push(`/calendar/new/${formatDate(dateSelected)}`)}>+
+        </button>
+
+        {detail &&
+          (
+            <div className={Styles.detailContent}>
+              <div className={Styles.detailTitle}>{detail.keyword}</div>
+              <div className={Styles.detailDate}>
+                {getDetailPeriod(detail.startDate, detail.endDate)}
+              </div>
+            </div>
+          )
+        }
       </div>
     </div>
   )
 }
-
-const contents = [
-  {
-    date: new Date('2023-08-15'),
-    cost: 815000,
-    content: "광복절"
-  },
-  {
-    date: new Date('2023-08-25'),
-    cost: 10000,
-    content: "월급날"
-  },
-  {
-    date: new Date('2023-08-18'),
-    cost: 5000,
-    content: "배고파"
-  },
-]
