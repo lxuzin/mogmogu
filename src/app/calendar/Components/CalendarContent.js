@@ -2,7 +2,6 @@ import css from "styled-jsx/css"
 
 const styles = css`
   .calendar-content {
-    margin-top: 10px;
     display: flex;
     flex-direction: column;
   }
@@ -21,11 +20,11 @@ function addCommas(number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-export default function CalendarContent({cost, content}) {
+export default function CalendarContent({cost, keyword}) {
   return (
     <div className="calendar-content">
       <div className="cost">{addCommas(cost)}</div>
-      <div>{content}</div>
+      <div>{keyword}</div>
       <style jsx>{styles}</style>
     </div>
   )

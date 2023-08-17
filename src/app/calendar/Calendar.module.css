@@ -1,6 +1,5 @@
 .calendarWrapper {
   height: 100%;
-  background-color: aquamarine;
   /* display: grid; */
   /* grid-template-rows: 80% 20%; */
 }
@@ -37,30 +36,43 @@
 }
 
 .addButton {
-  position: fixed;
-  bottom: 20vh;
-  right: 20px;
   background-color: #C998DC;
+  position: fixed;
+  bottom: 170px;
+  right: 20px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  border: none;
+  outline: none;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: #fff;
-  font-size: 32px;
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-  padding: 0 0 4px 0;
+  font-size: 33px;
+  box-shadow: #00000050 0px 2px 3px;
+  padding: 0 0.5px 15px 0;
+}
+
+.addButton:hover {
+  background-color: #B37CCF;
+}
+
+.addButton:active {
+  background-color: #A26ABF;
 }
 
 .detailTitle {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 300;
 }
 
 .detailDate {
   margin: 5px 0 0 0;
   font-size: 14px;
+  font-weight: 300;
   color: #999;
+}
+
+.react-calendar__navigation__label {
+  font-size: 20px;
+  font-weight: 500;
 }

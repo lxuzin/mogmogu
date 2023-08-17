@@ -8,10 +8,11 @@ import Home from '@mui/icons-material/Home';
 import Tune from '@mui/icons-material/Tune';
 import { colors } from '@mui/material';
 import { useGlobalContext } from '../Context/store';
-import { useRouter, usePathname } from 'next/navigation';
-import { Key } from '@mui/icons-material';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export const BottomNavBar = () => {
+  const path = usePathname();
   const router = useRouter();
   const { navIdx, setNavIdx } = useGlobalContext();
 
@@ -25,6 +26,17 @@ export const BottomNavBar = () => {
       router.push(link);
     }
   }
+
+  useEffect(() => {
+    const routes = ['/home', '/calendar', '/account', '/manage', '/settings'];
+    const idx = routes.findIndex(x => path.startsWith(x));
+    if (idx === -1)
+      return;
+    setNavIdx(idx);
+  }, [navIdx])
+
+  if (path.startsWith('/login'))
+    return null;
 
   return (
     <Box sx={{ width: `100vw` }}>
