@@ -6,7 +6,6 @@ import BorderColor from '@mui/icons-material/BorderColor';
 import Settings from '@mui/icons-material/Settings';
 import Home from '@mui/icons-material/Home';
 import Tune from '@mui/icons-material/Tune';
-import { colors } from '@mui/material';
 import { useGlobalContext } from '../Context/store';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -16,11 +15,6 @@ export const BottomNavBar = () => {
   const router = useRouter();
   const { navIdx, setNavIdx } = useGlobalContext();
 
-  const changeActiveColor = (index) => {
-    if (index === navIdx)
-      return colors.purple[400] + ' !important';
-  }
-
   const redirectTo = (link) => {
     return () => {
       router.push(link);
@@ -29,29 +23,41 @@ export const BottomNavBar = () => {
 
   useEffect(() => {
     const routes = ['/home', '/calendar', '/account', '/manage', '/settings'];
-    const idx = routes.findIndex(x => path.startsWith(x));
-    if (idx === -1)
-      return;
-    setNavIdx(idx);
-  }, [navIdx])
+    const idx = routes.findIndex(x => x === path);
+
+    if (idx !== -1)
+      setNavIdx(idx);
+
+    document.querySelectorAll('#bottom-nav button').forEach((x, idx) => {
+      if (idx === navIdx)
+        x.style.color = '#AB47BC';
+      else
+        x.style.color = '#A9A9A9';
+    });
+  }, [navIdx, path])
 
   if (path.startsWith('/login')) {
-    document.body.style.backgroundColor = '#c998dc';
+    document.body.style.backgroundColor = '#C998DC';
     return (
       <Box sx={{ position: 'fixed', bottom: 0, left: 0, height: '56px' }}></Box>
     );
   }
 
   if (path.startsWith('/join')) {
-    document.body.style.backgroundColor = '#fff';
+    document.body.style.backgroundColor = '#FFFFFF';
     return (
       <Box sx={{ position: 'fixed', bottom: 0, left: 0, height: '56px' }}></Box>
     );
   }
 
+  const loadingColor = {
+    color: '#A9A9A9'
+  }
+
   return (
     <Box sx={{ width: `100%`, position: 'fixed', bottom: 0, left: 0, right: 0 }}>
       <BottomNavigation
+        id='bottom-nav'
         showLabels
         value={navIdx}
         onChange={(event, idx) => {
@@ -60,23 +66,23 @@ export const BottomNavBar = () => {
       >
 
         <BottomNavigationAction label='홈' icon={<Home />}
-          sx={{ color: changeActiveColor(0) }}
+          style={loadingColor}
           onClick={redirectTo('/home')}
         />
         <BottomNavigationAction label='캘린더' icon={<CalendarMonth />}
-          sx={{ color: changeActiveColor(1) }}
+          style={loadingColor}
           onClick={redirectTo('/calendar')}
         />
         <BottomNavigationAction label='가계부' icon={<BorderColor />}
-          sx={{ color: changeActiveColor(2) }}
+          style={loadingColor}
           onClick={redirectTo('/account')}
         />
         <BottomNavigationAction label='관리' icon={<Tune />}
-          sx={{ color: changeActiveColor(3) }}
+          style={loadingColor}
           onClick={redirectTo('/manage')}
         />
         <BottomNavigationAction label='설정' icon={<Settings />}
-          sx={{ color: changeActiveColor(4) }}
+          style={loadingColor}
           onClick={redirectTo('/settings')}
         />
       </BottomNavigation>
