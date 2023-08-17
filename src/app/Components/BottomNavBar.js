@@ -55,6 +55,7 @@ export const BottomNavBar = () => {
         onChange={(event, idx) => {
           setNavIdx(idx);
         }}
+        sx={{ position : 'fixed', bottom: 0}}
       >
 
         <BottomNavigationAction label='홈' icon={<Home />}
