@@ -1,17 +1,52 @@
-'use client'
+import useJoinContext from "@/Context/Join/store";
 import { useRouter } from "next/navigation";
 
+export default function JoinForm3() {
 
-export default function Join2(props) {
+  const { user, setUser, formNum, setFormNum } = useJoinContext();
   const router = useRouter();
+
+  const addJoinInfo3 = async (e) => {
+    e.preventDefault();
+    setUser({
+      ...user,
+      myCode: e.target.myCode.value,
+      yourCode: e.target.yourCode.value,
+    })
+    console.log(user);
+    await actionJoin();
+  };
+
+
+  const actionJoin = async (e) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user),
+    }
+    try {
+      const resp = await fetch(process.env.API_URL + 'join', options);
+      if (!resp.ok) {
+        throw new Error("Bad response", {
+          cause: { resp }
+        })
+      }
+      const member = await resp.json();
+      setFormNum(1);
+      alert("회원가입을 축하합니다.")
+      router.push("/home")
+    } catch (e) {
+      setFormNum(3);
+      alert("회원가입에 실패하였습니다. 정보를 확인하세요");
+      router.refresh();
+    }
+  }
   return (
     <>
-      <div className="joinbody">
-        <div className="jointopbar">회원가입</div>
-        <div className="formWrapper">
-        <div className="joinLogoImg"><img src="/join/pingHeartLogo.png" alt="#" /></div>
-        {/* 바뀌는 부분만 css추가 */}
-        <div className="joinConnectDiv">
+      <div className="joinConnectDiv">
+        <form onSubmit={addJoinInfo3}>
           <div className="joinMyConnect">
             <label className="joinMyConnectLabel" htmlFor="myCode">내 커플연결 코드</label><br />
             <input className="joinMyConnectInput" type="text" id="myCode" name="myCode" defaultValue="12345678" /><br></br>
@@ -22,48 +57,20 @@ export default function Join2(props) {
           <div className="joinYourConnect">
             <label className="joinYourConnectLabel" htmlFor="yourCode">상대방 커플연결 코드</label><br />
             <input className="joinYourConnectInput" type="text" id="yourCode" name="yourCode" defaultValue=""
-              autoComplete='off' placeholder="상대방 코드를 입력해주세요." />
+              placeholder="상대방 코드를 입력해주세요." autoComplete='off' />
             <br />
           </div>
-        </div>
-        </div>
-        <div className="joinBtnDiv">
-          <button className="joinBtn" type="submit" onClick={() => {
-            router.push("/home")
-          }}>전송</button>
-          <button className="joinBtn" type="submit" onClick={() => {
-            router.push("/login")
-          }}>취소</button>
-        </div>
+
+          <div className="joinBtnDiv">
+            <button className="joinBtn" type="submit">다음</button>
+          </div>
+        </form>
       </div>
-      <style jsx>
-        {`
-        .joinbody {
-          background-color: white;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          height: 100%;
-        }
-
-        .jointopbar {
-          background-color: #EADEEF;
-          color: white;
-          width: 100%;
-          height: 42px;
-          display: flex;
-          align-items: center;
-        }
-
-        .joinLogoImg {
-          margin-top: 100px;
-          margin-bottom: 50px;
-          text-align: center;
-        }
-        
+      <style jsx>{`
         .joinConnectDiv {
           background-color : white;
-        
+          margin-top : 40%;
+          margin-bottom : 30px;
         }
         
         .joinMyConnect {
@@ -129,25 +136,25 @@ export default function Join2(props) {
           width: 70%;
           border-color: #C998DC;
           color: #909090;
+          margin-bottom: 10rem;
         
         }
         /* bottom 공유 */
         .joinBtnDiv {
           text-align: center;
-          margin-top : 15px;
           width: 100%;
-          margin-bottom: 30px;
         }
-
+        
         .joinBtn {
           background-color: #C998DC;
           color: white;
           border-color: white;
           border-radius: 5px;
-          width: 90%;
-
-        `}
-      </style>
+          width: 70%;
+          min-height: 35px;
+          margin-top: 15px;
+        }
+      `}</style>
     </>
   )
 }

@@ -39,13 +39,14 @@ export const BottomNavBar = () => {
     return null;
 
   return (
-    <Box sx={{ width: `100vw` }}>
+    <Box sx={{ width: `100%` }}>
       <BottomNavigation
         showLabels
         value={navIdx}
         onChange={(event, idx) => {
           setNavIdx(idx);
         }}
+        sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
       >
 
         <BottomNavigationAction label='홈' icon={<Home />}
@@ -69,6 +70,6 @@ export const BottomNavBar = () => {
           onClick={redirectTo('/settings')}
         />
       </BottomNavigation>
-    </Box>
+    </Box >
   );
 }
