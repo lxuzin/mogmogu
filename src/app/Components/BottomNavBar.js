@@ -1,5 +1,3 @@
-'use client'
-
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
@@ -10,17 +8,16 @@ import Home from '@mui/icons-material/Home';
 import Tune from '@mui/icons-material/Tune';
 import { colors } from '@mui/material';
 import { useGlobalContext } from '../Context/store';
-import { useRouter, usePathname } from 'next/navigation';
-import { useState } from 'react';
-import { Key } from '@mui/icons-material';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export const BottomNavBar = () => {
+  const path = usePathname();
   const router = useRouter();
-  const { value, setValue } = useGlobalContext();
-  const [path, setPath] = useState(usePathname());
+  const { navIdx, setNavIdx } = useGlobalContext();
 
   const changeActiveColor = (index) => {
-    if (index === value)
+    if (index === navIdx)
       return colors.purple[400] + ' !important';
   }
 
@@ -30,44 +27,48 @@ export const BottomNavBar = () => {
     }
   }
 
-  return (
-    <>
-      <Box sx={{ width: `100vw` }}>
-        <BottomNavigation
-          showLabels
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-        >
+  useEffect(() => {
+    const routes = ['/home', '/calendar', '/account', '/manage', '/settings'];
+    const idx = routes.findIndex(x => path.startsWith(x));
+    if (idx === -1)
+      return;
+    setNavIdx(idx);
+  }, [navIdx])
 
-          <BottomNavigationAction label='홈' icon={<Home />}
-            sx={{ color: changeActiveColor(0) }}
-            onClick={redirectTo('/home')}
-          />
-          <BottomNavigationAction label='캘린더' icon={<CalendarMonth />}
-            sx={{ color: changeActiveColor(1) }}
-            onClick={redirectTo('/calendar')}
-          />
-          <BottomNavigationAction label='가계부' icon={<BorderColor />}
-            sx={{ color: changeActiveColor(2) }}
-            onClick={redirectTo('/account')}
-          />
-          <BottomNavigationAction label='관리' icon={<Tune />}
-            sx={{ color: changeActiveColor(3) }}
-            onClick={redirectTo('/manage')}
-          />
-          <BottomNavigationAction label='설정' icon={<Settings />}
-            sx={{ color: changeActiveColor(4) }}
-            onClick={redirectTo('/settings')}
-          />
-          <BottomNavigationAction label='로그인' icon={<Key />}
-            sx={{ color: changeActiveColor(5) }}
-            onClick={redirectTo('/login')}
-          />
-        </BottomNavigation>
-      </Box>
-      : null
-    </>
+  if (path.startsWith('/login'))
+    return null;
+
+  return (
+    <Box sx={{ width: `100vw` }}>
+      <BottomNavigation
+        showLabels
+        value={navIdx}
+        onChange={(event, idx) => {
+          setNavIdx(idx);
+        }}
+      >
+
+        <BottomNavigationAction label='홈' icon={<Home />}
+          sx={{ color: changeActiveColor(0) }}
+          onClick={redirectTo('/home')}
+        />
+        <BottomNavigationAction label='캘린더' icon={<CalendarMonth />}
+          sx={{ color: changeActiveColor(1) }}
+          onClick={redirectTo('/calendar')}
+        />
+        <BottomNavigationAction label='가계부' icon={<BorderColor />}
+          sx={{ color: changeActiveColor(2) }}
+          onClick={redirectTo('/account')}
+        />
+        <BottomNavigationAction label='관리' icon={<Tune />}
+          sx={{ color: changeActiveColor(3) }}
+          onClick={redirectTo('/manage')}
+        />
+        <BottomNavigationAction label='설정' icon={<Settings />}
+          sx={{ color: changeActiveColor(4) }}
+          onClick={redirectTo('/settings')}
+        />
+      </BottomNavigation>
+    </Box>
   );
 }

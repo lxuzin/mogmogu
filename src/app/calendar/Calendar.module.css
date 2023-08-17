@@ -1,11 +1,78 @@
 .calendarWrapper {
   height: 100%;
-  background-color: aquamarine;
-  display: grid;
-  grid-template-rows: 80% 20%;
+  /* display: grid; */
+  /* grid-template-rows: 80% 20%; */
 }
 
-.reminder {
+.calendar {
+  background: linear-gradient(0deg, #ddd 0%, #fff 1%);
+  height: 600px;
+}
+
+.details {
+  height: calc(100% - 600px);
   width: 100%;
-  background-color: brown;
+  background: linear-gradient(180deg, #ddd 0%, #fff 5%);
+  padding: 25px;
+}
+
+.dateInfo {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  margin: 0 0 10px 0;
+}
+
+.dateSelected {
+  margin: 0 15px 0 0;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.d_day {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+  color: #999;
+}
+
+.addButton {
+  background-color: #C998DC;
+  position: fixed;
+  bottom: 170px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 33px;
+  box-shadow: #00000050 0px 2px 3px;
+  padding: 0 0.5px 15px 0;
+}
+
+.addButton:hover {
+  background-color: #B37CCF;
+}
+
+.addButton:active {
+  background-color: #A26ABF;
+}
+
+.detailTitle {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.detailDate {
+  margin: 5px 0 0 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: #999;
+}
+
+.react-calendar__navigation__label {
+  font-size: 20px;
+  font-weight: 500;
 }

@@ -1,0 +1,201 @@
+.background {
+  background-color: aliceblue;
+  display: grid;
+  grid-template-rows: 200px calc(100% - 200px);
+}
+.dateKeywordInputWrapper {
+  height: 200px;
+  width: 100%;
+  background: linear-gradient(0deg, #ddd 0%, #fff 5%);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dateInfo {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  margin: 0 0 10px 0;
+}
+
+.dateSelected {
+  margin: 0 6px 0 0;
+  font-size: 26px;
+  font-weight: 300;
+}
+
+.d_day {
+  margin: 13px 0 0 0;
+  font-size: 13px;
+  color: #999;
+}
+
+.keywordInputWrapper {
+  margin: 10px 0 0 0;
+  display: flex;
+  padding: 0 30px;
+  justify-content: space-between;
+}
+
+.keywordInput {
+  height: 40px;
+  width: 50%;
+  min-width: 200px;
+  border: none;
+  outline: none;
+  font-size: 24px;
+  margin: 0 0 10px 0;
+}
+
+.keywordInput::placeholder {
+  color: #999;
+}
+
+.daysElapsed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-image: url('/assets/images/icons/heart.svg');
+  background-repeat: no-repeat;
+  background-size: 50px;
+  padding: 0 0 8px 0;
+}
+
+.contentWrapper {
+  background: linear-gradient(180deg, #ddd 0%, #fff 1%);
+}
+
+.contentInputWrapper {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  min-height: 40px;
+  padding: 20px 10px;
+}
+
+.dateSelectionButton {
+  width: 100%;
+  height: 50px;
+  border: none;
+  outline: none;
+  background-color: #C998DC;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.dateSelectionButton:hover {
+  background-color: #B37CCF;
+  cursor: pointer;
+}
+
+.dates {
+  width: calc(100% - 100px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.date {
+  position: relative;
+  background-color: red;
+  max-width: 120px;
+  border: none;
+  outline: none;
+  font-size: 17px;
+  font-weight: 300;
+  background: none;
+  margin-right: 20px;
+}
+
+.icon_clock {
+  background-image: url('/assets/images/icons/clock.svg');
+}
+
+.icon_edit {
+  background-image: url('/assets/images/icons/edit.svg');
+}
+
+.icon_food_bank {
+  background-image: url('/assets/images/icons/food-bank.svg');
+}
+
+.icon_image {
+  background-image: url('/assets/images/icons/image.svg');
+}
+
+.icon_star {
+  background-image: url('/assets/images/icons/star.svg');
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 0 30px 0 10px;
+}
+
+.contentInput {
+  min-width: 200px;
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 17px;
+  font-weight: lighter;
+}
+
+.photoInput {
+  display: none;
+}
+
+.photoLabel {
+  width: 30px;
+  height: 30px;
+  margin: 0 30px 0 0;
+  color: #999;
+  cursor: pointer;
+}
+
+.seperator,
+.contentInput::placeholder {
+  color: #999;
+}
+
+.seperator {
+  font-size: 14px;
+}
+
+.addButton {
+  background-color: #C998DC;
+  position: fixed;
+  bottom: 120px;
+  right: calc(50% - 20px);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 33px;
+  box-shadow: #00000050 0px 2px 3px;
+  padding: 0 0 20px 1px;
+  transition: all 0.3s ease-in-out;
+}
+
+.addButton:hover {
+  background-color: #B37CCF;
+  cursor: pointer;
+}
+
+.addButton:active {
+  background-color: #A26ABF;
+}
