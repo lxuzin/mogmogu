@@ -20,12 +20,14 @@ export default function RootLayout({ children }) {
         <link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png" />
       </head>
       <body>
-        <div className={Style.root}>
-          <GlobalContextProvider>
-            {children}
-            <BottomNavBar/>
-          </GlobalContextProvider>
-        </div>
+        <GlobalContextProvider>
+          <div className={Style.root}>
+            <div className={Style.app}>
+              {children}
+            </div>
+          </div>
+          <BottomNavBar />
+        </GlobalContextProvider>
       </body>
     </html >
   )

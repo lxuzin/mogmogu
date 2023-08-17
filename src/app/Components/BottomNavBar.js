@@ -35,17 +35,19 @@ export const BottomNavBar = () => {
     setNavIdx(idx);
   }, [navIdx])
 
-  if (path.startsWith('/login'))
+  if (path.startsWith('/login')) {
+    document.body.style.backgroundColor = '#c998dc';
     return (
-      <Box sx={{ width: `100%`, position: 'fixed', bottom: 0, left: 0, right: 0, height: '56px', backgroundColor: '#C998DC' }}>
-        </Box>
-  );
+      <Box sx={{ position: 'fixed', bottom: 0, left: 0, height: '56px' }}></Box>
+    );
+  }
 
-  if (path.startsWith('/join'))
-  return (
-    <Box sx={{ width: `100%`, position: 'fixed', bottom: 0, left: 0, right: 0, height: '56px', backgroundColor: 'none' }}>
-      </Box>
-);
+  if (path.startsWith('/join')) {
+    document.body.style.backgroundColor = '#fff';
+    return (
+      <Box sx={{ position: 'fixed', bottom: 0, left: 0, height: '56px' }}></Box>
+    );
+  }
 
   return (
     <Box sx={{ width: `100%`, position: 'fixed', bottom: 0, left: 0, right: 0 }}>
@@ -55,7 +57,6 @@ export const BottomNavBar = () => {
         onChange={(event, idx) => {
           setNavIdx(idx);
         }}
-        sx={{ position : 'fixed', bottom: 0}}
       >
 
         <BottomNavigationAction label='홈' icon={<Home />}
