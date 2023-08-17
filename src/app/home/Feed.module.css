@@ -1,0 +1,92 @@
+.container {
+  position: fixed;
+  background-color: white;
+  width: 60%;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  border: 0.1px solid black;
+  z-index: 9999;
+}
+
+.lineContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .lineImage {
+    width: 80%;
+  }
+  
+  .textContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .centeredText {
+    position: relative;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  .centerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 35px; 
+  }
+  
+  .centeredImage {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+  }
+  
+  .customButton {
+    padding: 10px 20px;
+    background-color: #C998DC;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 120px;
+  }
+
+  .bottom {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  
+  .coincontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .coin {
+    max-width: 80%;
+    height: auto;
+  }
+  
+  .cointext {
+    margin-left: 5px;
+    font-size: 10px;
+  }

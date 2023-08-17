@@ -1,0 +1,109 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    background-image: url("/images/kuromi_background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* 검정색 투명도 80% */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100; /* 모달이 상위에 표시되도록 설정 */
+}
+
+.header {
+  display: flex;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.profile {
+  font-size: 10px;
+  color: black;
+}
+
+.imageContainer {
+  display: flex;
+  align-items: center;
+  max-height: 20px;
+}
+
+.text {
+  font-size: inherit;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.left-image {
+  max-height: 10px;
+  margin-right: 10px;
+  object-fit: contain;
+}
+
+.right-image {
+  max-height: 10px;
+  margin-left: 10px;
+  object-fit: contain;
+}
+
+.center-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.AdWrapper {
+  background-image: url("/images/advertisement.png");
+  width: 100%;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid black;
+}
+
+.feedButton {
+  position: fixed;
+  bottom : 25vh;
+  right: 2vw;
+  background-image: url("/images/logo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+}
+
+.logo {
+  position: fixed;
+  bottom : 25vh;
+  right: 5vw;  
+  width: 50px;
+  height: 50px;
+}
+
+.line_container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0px;
+}
+
+.text_container {
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 2px;
+}

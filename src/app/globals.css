@@ -6,9 +6,16 @@
 }
 
 body {
+<<<<<<< HEAD
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
+=======
+  min-width: 100%;
+  width: 56.25%;
+  height: 100%;
+  overflow: hidden;
+>>>>>>> f9b39d80280eba2a0aba96012ad9c15656933a85
 }
