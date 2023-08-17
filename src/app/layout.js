@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 
 export default function RootLayout({ children }) {
   const router = useRouter();
-  const showNav = router.pathname === '/login' ? false : true;
 
   return (
     <html lang="en">
@@ -23,7 +22,7 @@ export default function RootLayout({ children }) {
         <div className={Style.root}>
           <GlobalContextProvider>
             {children}
-            {showNav && <BottomNavBar/>}
+            <BottomNavBar/>
           </GlobalContextProvider>
         </div>
       </body>
