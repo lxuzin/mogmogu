@@ -1,5 +1,4 @@
 'use client'
-
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from "next/navigation";
@@ -13,7 +12,7 @@ export default function Manage2(props) {
         <button className="backBtn" type="submit" onClick={() => router.push("/manage")}>
           <img src="../images/back.png" />
         </button>
-        <span style={{ fontSize: '15px', marginLeft: "5%", fontWeight: 'bold' }}> | 지출 관리 목표 이벤트 추가하기</span>
+        <span style={{ fontSize: '15px', marginLeft: "5%", fontWeight: 'bold' }}> | 지출 관리 목표 이벤트 편집</span>
         <span style={{ fontSize: '13px', marginLeft: "5%", fontWeight: 'bold', marginTop: "5%" }}> 목표 이벤트 이름 </span>
         <div className="box-container">
           <div className="box">
@@ -50,8 +49,11 @@ export default function Manage2(props) {
             </div>
         </div>
         <div className="btn-container">
-          <div className="addBtn">
-            목표 추가하기          
+          <div className="Btn">
+            편집         
+          </div>
+          <div className="Btn">
+            수정         
           </div>
         </div>
       </div>
@@ -80,9 +82,9 @@ export default function Manage2(props) {
             justify-content: flex-end;
           }
 
-          .addBtn {
+          .Btn {
             background-color: #C08CD4;
-            width: 30%;
+            width: 15%;
             height: 20px;
             border: 1px solid #ffffff;
             border-radius: 5px;       
@@ -91,6 +93,7 @@ export default function Manage2(props) {
             color: white;
             font-size: 14px;
             font-weight: bold;
+            margin-left: 2%;
           }
 
           .box-container {

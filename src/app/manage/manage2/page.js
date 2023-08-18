@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from "next/navigation";
 
 export default function Manage2(props) {
@@ -39,17 +40,18 @@ export default function Manage2(props) {
         <span style={{ fontSize: '15px', marginLeft: "5%", fontWeight: 'bold' }}> | 지출 관리 목표 이벤트</span>
         <div className="box-container">{boxElements}</div>
         <div className="box-container">
+        <Link href="/manage/manage2/add">
             <button className="addBtn" style={{
             fontWeight: "bold",
             color: "white"
-            }} onClick={addBox}>
+            }}>
             이벤트 추가하기
             </button>
-        
+        </Link>
             <button className="editBtn" style={{
             fontWeight: "bold",
             color: "white"
-            }}>
+            }} onClick={() => router.push("/manage/manage2/")}>
             편집
             </button>
         </div>
