@@ -29,29 +29,16 @@ export const BottomNavBar = () => {
       setNavIdx(idx);
 
     document.querySelectorAll('#bottom-nav button').forEach((x, idx) => {
-      if (idx === navIdx)
-        x.style.color = '#AB47BC';
-      else
-        x.style.color = '#A9A9A9';
+      x.style.color = (idx === navIdx ? '#AB47BC' : '#A9A9A9');
     });
   }, [navIdx, path])
 
-  if (path.startsWith('/login')) {
-    document.body.style.backgroundColor = '#C998DC';
-    return (
-      <Box sx={{ position: 'fixed', bottom: 0, left: 0, height: '56px' }}></Box>
-    );
-  }
-
-  if (path.startsWith('/join')) {
-    document.body.style.backgroundColor = '#FFFFFF';
-    return (
-      <Box sx={{ position: 'fixed', bottom: 0, left: 0, height: '56px' }}></Box>
-    );
-  }
-
   const loadingColor = {
     color: '#A9A9A9'
+  }
+
+  if (path.startsWith('/login') || path.startsWith('/join')) {
+    return (<></>)
   }
 
   return (

@@ -2,11 +2,19 @@
 import { BottomNavBar } from './Components/BottomNavBar'
 import './globals.css'
 import Style from "./page.module.css";
-import { GlobalContextProvider, useGlobalContext } from './Context/store';
-import { useRouter } from 'next/navigation';
+import { GlobalContextProvider } from './Context/store';
+import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function RootLayout({ children }) {
-  const router = useRouter();
+  const path = usePathname();
+  const [isOnline, setIsOnline] = useState(true);
+
+  useEffect(() => {
+    console.log(`isOnline: ${isOnline}`);
+    if (path.startsWith('/login') || path.startsWith('/join'))
+      setIsOnline(false);
+  }, [isOnline])
 
   return (
     <html lang="en">
@@ -20,7 +28,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <GlobalContextProvider>
-          <div className={Style.root}>
+          <div className={`${Style.root} ${isOnline ? Style.rootOnline : Style.rootOffline}`}>
             <div className={Style.app}>
               {children}
             </div>
