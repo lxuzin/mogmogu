@@ -1,17 +1,16 @@
 'use client'
 
 import { useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from "next/navigation";
 
-export default function Manage2(props) {
+export default function Add(props) {
   const router = useRouter();
 
   return (
     <>
       <div className="container">
-        <button className="backBtn" type="submit" onClick={() => router.push("/manage")}>
-          <img src="../images/back.png" />
+        <button className="backBtn" type="submit" onClick={() => router.push("/manage/manage2")}>
+          <img src="../../images/back.png" />
         </button>
         <span style={{ fontSize: '15px', marginLeft: "5%", fontWeight: 'bold' }}> | 지출 관리 목표 이벤트 추가하기</span>
         <span style={{ fontSize: '13px', marginLeft: "5%", fontWeight: 'bold', marginTop: "5%" }}> 목표 이벤트 이름 </span>
