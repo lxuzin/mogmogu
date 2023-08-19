@@ -8,7 +8,6 @@ import { useState } from "react";
 export default function AccountCalender() {
   const { date, setDate } = useAccountContext();
   const [dayName, setDayName] = useState();
-
   const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate(); // 2023, 7+1 -> 31
   const daysArray = Array.from({ length: daysInMonth }, (_, index) => index + 1);
   /**

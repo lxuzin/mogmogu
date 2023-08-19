@@ -1,8 +1,17 @@
 'use client'
 
 import AccountCalendar from "@/Containers/account/AccountCalendar"
+import useAccountContext from "@/Context/account/store"
+import Link from "next/link";
 
 export default function Account(props) {
+  const { date, setDate,
+    datingCostList, setDatingCostList,
+    datingCostObject, setDatingCostObject } = useAccountContext();
+  // 데이트를 기준으로 거래내역을 가져오고
+  // 거래내역 중 +출금과 -입급 을 계산해서
+  // 하루지출과 이번달 총 지출을 계산한다.
+
   return (
     <div className="AccountMogBody">
       <AccountCalendar />
@@ -20,7 +29,7 @@ export default function Account(props) {
       </div>
       <div>
         <div className="AccountMogImgDiv">
-          <img src="./account/mog1.png" alt="" />
+          <img src="/account/mog1.png" alt="" />
           <div className="AccountMogImgDecriptionCircle">
             <div className="AccountMogImgDecription">오늘의 데이트 비용을 기록하세요</div>
           </div>
@@ -42,16 +51,14 @@ export default function Account(props) {
               </div>
               <p>3000</p>
             </div>
-
-            {/* 두 번째 일정 생략 */}
-
           </div>
           <div className="AccountMogNotContent"><br />
             <h2>공유된 내역이 없습니다.</h2>
           </div>
         </div>
         <div>
-          <button className="AccountDateCostShareBtn">데이트비용 공유</button>
+          <button className="AccountDateCostShareBtn">
+            <Link style={{textDecorationLine: 'none', color: 'white'}} href="/account/share">데이트비용 공유</Link></button>
         </div>
       </div>
       <style jsx>{`

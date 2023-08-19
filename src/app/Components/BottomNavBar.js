@@ -23,7 +23,13 @@ export const BottomNavBar = () => {
 
   useEffect(() => {
     const routes = ['/home', '/calendar', '/account', '/manage', '/settings'];
-    const idx = routes.findIndex(x => x === path);
+    let idx = -1;
+    routes.forEach((x, i) => {
+      if (path.includes(x)) {
+        idx = i
+      }
+    })
+    // const idx = routes.findIndex(x => x === path);
 
     if (idx !== -1)
       setNavIdx(idx);

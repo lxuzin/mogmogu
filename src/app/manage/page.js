@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { Chart, LinearScale, CategoryScale } from 'chart.js';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar, Label} from 'recharts';
 import { PieChart, Pie, Cell } from 'recharts';
+import Link from 'next/link';
 
 const data = [
   { 요일: '월', 지난주지출: 34000, 이번주지출: 32760 },
@@ -119,7 +120,7 @@ function Manage() {
             <div style={{ display:'flex', justifyContent:'flex-end', marginBottom:'8px', marginRight:'20px'}}>
               <div >
                 <p style={{ font: 'caption' }}> 현재 우리의 저축 및 절약 현황이 궁금하다면 ? </p>
-                <h4 style={{ textDecoration: 'underline', display:'flex', justifyContent:'flex-end' }}><a href="/manage/spend"> 저축 및 절약 스케줄링 바로가기 ▶️ </a></h4>
+                <h4 style={{ textDecoration: 'underline', display:'flex', justifyContent:'flex-end' }}><Link href="/manage/spend"> 저축 및 절약 스케줄링 바로가기 ▶️ </Link></h4>
               </div>
             </div>
           <hr />
