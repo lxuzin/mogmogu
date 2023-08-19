@@ -178,6 +178,7 @@ export default function Manage2(props) {
             background-color: #F6F6F6;
           }
 
+          
           .box {
             width: 100%;
             border: 0.5px solid #550077;
