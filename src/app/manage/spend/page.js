@@ -53,7 +53,7 @@ const Spend = () => {
         <div>
             <div style={{margin:'15px'}}>
                 <p style={{font:'initial'}}> | 일주일 지출 </p>
-                <LineChart width={375} height={270} data={data} margin={{ top: 8, right: 30, left: 12, bottom: 10 }}>
+                <LineChart width={470} height={270} data={data} margin={{ top: 8, right: 30, left: 12, bottom: 10 }}>
                     <CartesianGrid strokeDasharray="3 3" /> 
                     <XAxis dataKey="요일" onClick={(event) => { const dataIndex = event.activeTooltipIndex !== undefined ? event.activeTooltipIndex : event.index;const clickedDay = data[dataIndex]?.요일;if (clickedDay) {handleDayClick(clickedDay);}}}/>
                     <YAxis hide />
@@ -67,14 +67,14 @@ const Spend = () => {
                 <hr/>
             </div>
             <div style={{margin:'18px'}}>
-                <p> 30,000원 </p>
-                <p style={{color:'blue', font:'initial', marginBottom:'10px'}}> 지난주 대비 26,000원 🔽 </p>
+                <p> 00,000원 </p>
+                <p style={{color:'blue', font:'initial', marginBottom:'10px'}}> 지난주 대비 00,000원 🔽 </p>
                 <hr/>
             </div>
             <div style={{margin:'20px'}}>
                 <h3> 
                     <span>상세내역</span>
-                    {selectedDay && <span style={{marginLeft:'250px', fontSize:'small'}}>{selectedDay} </span>}
+                    {selectedDay && <span style={{marginLeft:'370px', fontSize:'small'}}>{selectedDay} </span>}
                 </h3>
                 {selectedDetails.length > 0 ? (
                 selectedDetails.map((detail, index) => (
@@ -84,7 +84,7 @@ const Spend = () => {
                             {detail.category === 'GS25 뚝섬유원지점' && <img src="/gs.jpeg" alt='' style={{ width: '20px', height: '20px', marginRight: '5px'}} />}
                         </span>
                         <span>{detail.category}</span>
-                        <span style={{ marginLeft: '160px' }}>{detail.amount}</span>
+                        <span style={{ marginLeft:'400px' }}>{detail.amount}</span>
                     </h4>
                 ))
             ) : (

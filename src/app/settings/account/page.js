@@ -24,18 +24,37 @@ const Account = () => {
   const button1 = {
     backgroundColor: '#C998DC',
     marginLeft: '10px',
-    borderRadius: '10px',
+    borderRadius: '6px',
     border: 'none',
     color:'white',
-    padding:'2px'
+    padding:'2px',
+    width:'65px',
+    height:'30px',
+    marginLeft:'50px'
   };
+
   const button2 = {
     backgroundColor: '#C998DC',
     marginLeft: '20px',
-    borderRadius: '10px',
+    borderRadius: '6px',
     border : 'none',
     color:'white',
-    padding:'2px'
+    padding:'2px',
+    width:'70px',
+    height:'30px',
+    marginLeft:'50px'
+  };
+
+  const button3 = {
+    backgroundColor: '#C998DC',
+    marginLeft: '10px',
+    borderRadius: '6px',
+    border: 'none',
+    color:'white',
+    padding:'2px',
+    width:'65px',
+    height:'30px',
+    marginLeft:'40px'
   };
 
   const modalStyle = {
@@ -51,8 +70,8 @@ const Account = () => {
 
     zIndex:1000,
     minWidth:'300px',
-    width: '80%', // 원하는 너비
-    maxHeight: '80%', // 원하는 높이
+    width: '80%', 
+    maxHeight: '80%', 
     overflowY: 'auto',
   };
   
@@ -73,26 +92,25 @@ const Account = () => {
     event.preventDefault();
     console.log('Selected Account:', selectedAccount);
     setIsModalOpen(true);
-    // 여기에 다음 액션을 추가하면 됩니다.
   };
 
   
 
   return (
     <div >
-      <h1 style={{ backgroundColor: '#CBA1DC', padding: '10px', color:'white' }}>계좌 연결</h1>
+      <h1 style={{ backgroundColor: 'rgba(203, 161, 220, 0.57)', padding: '10px', color:'white' }}>계좌 연결</h1>
       <h3 style={{color: '#C998DC', padding:'9px'}}>연결 계좌</h3>
 
-      <form onSubmit={handleFormSubmit}>
-        <label htmlFor="accountSelect"> </label>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <label htmlFor="accountSelect" style={{ marginRight: '10px' }}>계좌 선택</label>
         <select id="accountSelect" value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)}>
-          <option value="" > 계좌 선택 </option>
+          <option value="">계좌 선택</option>
           <option value={userAccount.ac1}>신한은행 입출금 통장</option>
           <option value={userAccount.ac2}>카카오뱅크 입출금 통장</option>
           <option value={userAccount.ac5}>부산은행 입출금 통장</option>
         </select>
-          <button type="submit" style={{marginLeft:'10px', backgroundColor:'#E2CAEB', border: 'none', color:'white'}}> 연결 </button>
-      </form>
+        <button type="submit" style={{ backgroundColor: '#E2CAEB', border: 'none', color: 'white', marginLeft: '12px', borderRadius: '5px', height:'20px', width:'50px' }}>연결</button>
+      </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -103,7 +121,7 @@ const Account = () => {
         <div style={{ display: 'flex', alignItems: 'center', marginLeft: '10px' }}>
           <img src="/kakao.jpg" alt="" style={{ width: '20px', height: '21px' }} />
           <p style={{ marginLeft: '10px', padding:'7px' }}>카카오뱅크 입출금 통장 <br /> {userAccount.ac2}</p>
-          <button type='submit' style={button2}> 상세보기 </button>
+          <button type='submit' style={button3}> 상세보기 </button>
         </div>
       </div>
 
@@ -114,7 +132,7 @@ const Account = () => {
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <img src="/rnrals.jpg" alt="" style={{ width: '20px', height: '17px', marginLeft: '10px' }} />
           <p style={{ marginLeft: '10px', padding:'7px' }}>국민은행 입출금 통장 <br /> {userAccount.ac3}</p>
-          <button type='submit' style={button1} onClick={() => setIsModalOpen(true)}> 선택하기 </button>
+          <button type='submit' style={button2} onClick={() => setIsModalOpen(true)}> 선택하기 </button>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', marginLeft: '10px' }}>
           <img src="/rnrals.jpg" alt="" style={{ width: '20px', height: '21px' }} />
@@ -123,14 +141,13 @@ const Account = () => {
         </div>
       </div>
       </div>
-      <div style={{marginLeft:'60px', marginTop:'15px'}}>
+      <div style={{marginLeft:'40px', marginTop:'15px'}}>
         <button type='submit' style={customButton}> ➕ 계좌 연결 </button>
       </div>
       {isModalOpen && (
         <div style={modalStyle}>
           <h3>새로운 계좌가 연결되었습니다 !</h3>
-          <h2 style={{textAlign:'center', fontSize:'25px'}}>✔️</h2>
-          <img src='/ahrm.png' alt='' style={{maxWidth:'100%'}}/>
+          <img src='/mog.png' alt='' style={{maxWidth:'100%'}}/>
           <p style={{color:'#C998DC', marginBottom:'8px'}}>이제 돈을 많이 '모앙'주세요 !</p>
           <button style={modalButtonStyle} onClick={() => setIsModalOpen(false)}>닫기</button>
         </div>

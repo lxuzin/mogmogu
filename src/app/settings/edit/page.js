@@ -13,9 +13,9 @@ const Edit = () => {
     width: '270px',
     height: '35px',
     padding: '12px 24px',
-    borderRadius: '20px',
+    borderRadius: '9px',
     marginTop: '40px',
-    marginLeft: '30px',
+    marginLeft: '110px',
     border: 'none',
     color: 'white',
   };
@@ -34,23 +34,22 @@ const Edit = () => {
   
   const modalContentStyle = {
     backgroundColor: 'white',
-    padding: '40px',
+    padding: '50px',
     borderRadius: '10px',
     boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)',
     textAlign: 'center',
     width:'300px',
-    height:'100px',
+    height:'300px',
+    backgroundColor:'#E2CAEB'
   };
 
   const handleSaveClick = () => {
-    // 여기에 비밀번호 변경 로직을 추가하세요
-    // 현재 비밀번호와 새로운 비밀번호 검증 등을 처리할 수 있습니다.
     setIsModalOpen(true);
   };
 
   return (
     <div>
-      <h1 style={{ backgroundColor: '#C998DC', padding: '10px', color: 'white' }}>
+      <h1 style={{ backgroundColor: 'rgba(203, 161, 220, 0.57)', padding: '10px', color: 'white' }}>
         비밀번호 변경
       </h1>
 
@@ -62,21 +61,21 @@ const Edit = () => {
           value={currentPassword}
           onChange={(e) => setCurrentPassword(e.target.value)}
           placeholder="현재 비밀번호 입력"
-          style={{ display: 'block', margin: '10px', padding: '10px', width:'300px' }}
+          style={{ display: 'block', margin: '10px', marginLeft:'40px', padding: '10px', width:'400px'  }}
         />
         <input
           type="password"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           placeholder="새로운 비밀번호 입력"
-          style={{ display: 'block', margin: '10px', padding: '10px', width:'300px' }}
+          style={{ display: 'block', margin: '10px', marginLeft:'40px', padding: '10px', width:'400px' }}
         />
         <input
           type="password"
           value={confirmNewPassword}
           onChange={(e) => setConfirmNewPassword(e.target.value)}
           placeholder="새로운 비밀번호 확인"
-          style={{ display: 'block', margin: '10px', padding: '10px', width:'300px' }}
+          style={{ display: 'block', margin: '10px',  marginLeft:'40px',padding: '10px', width:'400px' }}
         />
         <button onClick={handleSaveClick} style={customButtonStyle}>
           비밀번호 변경
@@ -85,8 +84,10 @@ const Edit = () => {
       {isModalOpen && (
         <div style={modalStyle}>
           <div style={modalContentStyle}>
-            <p>비밀번호가 변경되었습니다.</p>
-            <button onClick={() => setIsModalOpen(false)}>확인</button>
+            <div >
+              <p style={{marginTop:'65px', marginBottom:'30px'}}>비밀번호가 변경되었습니다.</p>
+              <button style={{ width:'85px',height:'35px',border:'none', color:'purple'}} onClick={() => setIsModalOpen(false)}>확인</button>
+            </div>
           </div>
         </div>
       )}

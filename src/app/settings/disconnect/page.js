@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 
 const disconnect = () => {
     const [checked, setChecked] = useState(false);
+    const [isDisconnected, setIsDisconnected] = useState(false);
 
     const disc = {
         backgroundColor:'#E2CAEB',
@@ -11,7 +12,7 @@ const disconnect = () => {
         border:'none',
         width:'340px',
         height:'50px',
-        marginLeft:'20px',
+        marginLeft:'80px',
     };
 
     const checkStyle = {
@@ -23,10 +24,14 @@ const disconnect = () => {
         setChecked(!checked);
     };
 
+    const handleDisconnect = () => {
+        setIsDisconnected(true);
+    };
+
 
     return (
     <div>
-        <div style={{textAlign:'center'}}>
+        <div style={{textAlign:'center', marginTop:'30px'}}>
             <h1>❗</h1>
             <h2>주의사항 </h2>
         </div>
@@ -42,7 +47,7 @@ const disconnect = () => {
         <div style={{ padding: '20px', border: '1px solid #ccc', borderRadius: '10px', margin: '20px', backgroundColor: '#EADEEF', textAlign:'center' }}>
             <h3>이모아님과의 연결을 끊겠습니까?</h3>
             <div style={{display:'flex'}}>
-                <img src='/znfhal.jpg' alt='' style={{ padding:'8px', width: '100px', height: '100px', borderRadius: '50%', marginRight: '20px', marginLeft:'10px' }}></img>
+                <img src='/znfhal.jpg' alt='' style={{ padding:'8px', width: '100px', height: '100px', borderRadius: '50%', marginRight: '20px', marginLeft:'60px' }}></img>
                 <h2 style={{ fontSize: '30px' }}>❤️</h2>
                 <img src='/profile-picture.jpg' alt='' style={{ padding:'8px', width: '100px', height: '100px', borderRadius: '50%', marginRight: '20px', marginLeft:'10px' }}></img> 
             </div>
@@ -55,8 +60,14 @@ const disconnect = () => {
         <div style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '10px', margin: '20px', backgroundColor: 'white' }}>
             <h3> <span style={checkStyle} onClick={toggleCheck}>✔️</span>  위 내용을 전부 확인했습니다.</h3>
         </div>
+
+        {isDisconnected && (
+                <div style={{ textAlign: 'center', marginTop: '20px', color: 'red' }}>
+                    연결이 성공적으로 끊어졌습니다.
+                </div>
+            )}
         <div >
-            <button type='submit' style={disc}>연결 끊기</button>
+            <button type='submit' style={disc} onClick={handleDisconnect}>연결 끊기</button>
         </div>
     </div>
     );

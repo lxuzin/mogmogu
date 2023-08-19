@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { Chart, LinearScale, CategoryScale } from 'chart.js';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar, Label} from 'recharts';
 import { PieChart, Pie, Cell } from 'recharts';
+import Link from 'next/link';
 
 const data = [
   { 요일: '월', 지난주지출: 34000, 이번주지출: 32760 },
@@ -40,7 +41,7 @@ function Manage() {
     top: '150px',
     left: '120px',
     backgroundColor: 'white',
-    width: '245px',
+    width: '340px',
     height: '70px',
     padding: '5px',
     borderRadius: '5px',
@@ -111,7 +112,7 @@ function Manage() {
           <div style={{display:'flex'}}>
             <img src='/ahrm.png' alt='' style={{ marginLeft: '10px', width: '100px', height: '100px' }}></img>
               <div style={bubbleStyle}>
-                <p style={{ padding: '7px' }}>현재 목표 달성 확률은 70%입니다! 
+                <p style={{ padding: '15px' }}>현재 목표 달성 확률은 70%입니다! 
                 <br /> 절약 목표 달성을 위해 달려보아요🏃🏃
                 </p>
               </div>
@@ -119,7 +120,7 @@ function Manage() {
             <div style={{ display:'flex', justifyContent:'flex-end', marginBottom:'8px', marginRight:'20px'}}>
               <div >
                 <p style={{ font: 'caption' }}> 현재 우리의 저축 및 절약 현황이 궁금하다면 ? </p>
-                <h4 style={{ textDecoration: 'underline', display:'flex', justifyContent:'flex-end' }}><a href="/manage/spend"> 저축 및 절약 스케줄링 바로가기 ▶️ </a></h4>
+                <h4 style={{ textDecoration: 'underline', display:'flex', justifyContent:'flex-end' }}><Link href="/manage/spend"> 저축 및 절약 스케줄링 바로가기 ▶️ </Link></h4>
               </div>
             </div>
           <hr />
@@ -135,7 +136,7 @@ function Manage() {
               </p> 
             </div>
           </div>
-            <LineChart width={400} height={270} data={data} margin={{ top: 8, right: 30, left: 12, bottom: 10 }}>
+            <LineChart width={495} height={270} data={data} margin={{ top: 8, right: 30, left: 12, bottom: 10 }}>
             <CartesianGrid strokeDasharray="3 3" /> 
             <XAxis dataKey="요일" />
             <YAxis hide />
@@ -152,7 +153,7 @@ function Manage() {
             <span>총 000.000원</span>
             <span style={{fontSize:'2px', color:'#9950B7', marginLeft:'15px'}}>지난달 이맘때보다 0만 원 절약했어요! </span>
           </p>
-          <BarChart width={360} height={70} data={db} margin={{top:5, right:20, bottom:10 }} layout="vertical">
+          <BarChart width={440} height={67} data={db} margin={{top:5, right:20, bottom:10 }} layout="vertical">
           <CartesianGrid strokeDasharray="3 3"/>
             <XAxis type="number" />
             <YAxis type="category"/>
@@ -161,7 +162,7 @@ function Manage() {
             {keys.map((key, index) => (
           <Bar key={key} dataKey={key} stackId="a" fill={colors[index]} />))}
           </BarChart>
-          <div style={{ font: 'initial', padding: '25px', marginLeft: '45px' }}>
+          <div style={{ font: 'initial', padding: '25px', marginLeft: '110px' }}>
           <table>
               <tbody>
                     {keys.map((key, index) => (

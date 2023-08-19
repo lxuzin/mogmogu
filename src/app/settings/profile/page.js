@@ -17,9 +17,9 @@ const Profile = () => {
 
   return (
     <div>
-      <h1 style={{ backgroundColor: '#CBA1DC', padding: '10px',color:'white' }}>My Page</h1>
+      <h1 style={{ backgroundColor: 'rgba(203, 161, 220, 0.57)', padding: '10px',color:'white' }}>마이페이지</h1>
       <hr/>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ display: 'flex', alignItems: 'center', padding:'10px' }}>
         <img
           src="/profile-picture.jpg"
           alt=""
@@ -28,28 +28,45 @@ const Profile = () => {
       <div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <h2 style={{fontStyle:'italic'}}>{userProfile.name}</h2> 
-          <img src="/image1.png" alt="" style={{ width: '13px', height: '13px', marginLeft: '5px' }} />
         </div>
-          <h4 style={{fontStyle:'italic', margin:'5px'}}>{userProfile.cp}</h4> 
-          <p style={{fontSize:'small', margin:'5px'}}>{userProfile.massage}</p>
+          <h4 style={{fontStyle:'italic', margin:'8px'}}>{userProfile.cp}</h4> 
+          <p style={{fontSize:'small', margin:'8px'}}>{userProfile.massage}</p>
         </div>
       </div>
       
       <hr />
       <div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <p style={{margin:'10px', marginLeft:'10px'}}> 생일 | {userProfile.birthday}</p> 
-        <img src="/image1.png" alt="" style={{ width: '13px', height: '13px', marginLeft: '5px' }} />
+        <p style={{margin:'10px'}}>
+        <span style={{ color:'#C998DC', marginLeft:'20px'}}> 생일  </span> 
+        <span style={{marginLeft:'45px'}}>{userProfile.birthday}</span></p> 
+        <img src="/pen.png" alt="" style={{ width: '13px', height: '13px', marginLeft: '100px' }} />
       </div>
       <hr/>
-        <p style={{margin:'10px'}}> 성별 | {userProfile.gender}</p><hr/>
-        <p style={{margin:'10px'}}>📩 계정 | {userProfile.id}</p><hr/>
-        <p style={{margin:'10px'}}>📩 상대계정 | {userProfile.id2}</p><hr/>
-        <p style={{margin:'10px'}}>📱 전화번호 | {userProfile.phone}</p><hr/>
-      </div>
       <div >
-        <p style={{ padding:'15px', backgroundColor: '#CBA1DC',  color:'white'}}> <Link href="/settings/edit"> 비밀번호 변경 </Link></p><hr/>
-        <p style={{ padding:'15px', backgroundColor: '#CBA1DC', color:'white'}}><Link href="/settings/disconnect"> 상대방과 연결 끊기 </Link></p><hr/>
+      <p style={{margin:'10px'}}> 
+        <span style={{color:'#C998DC', marginLeft:'20px'}}>성별  </span>
+        <span style={{marginLeft:'45px'}}>{userProfile.gender}</span> 
+        <img src="/pen.png" alt="" style={{ width: '13px', height: '13px', marginLeft: '140px' }} />
+      </p><hr/>
+      <p style={{margin:'10px'}}> 
+        <span style={{color:'#C998DC'}}>📩 계정  </span>
+        <span style={{marginLeft:'45px'}}>{userProfile.id}</span> 
+      </p><hr/>
+      <p style={{margin:'10px'}}> 
+        <span style={{color:'#C998DC'}}>📩 상대계정  </span>
+        <span style={{marginLeft:'20px'}}>{userProfile.id2}</span> 
+      </p><hr/>
+      <p style={{margin:'10px'}}> 
+        <span style={{color:'#C998DC'}}>📱 전화번호  </span>
+        <span style={{marginLeft:'20px'}}>{userProfile.phone}</span> 
+      </p>
+      </div>
+    </div>
+
+      <div>
+        <p style={{ padding:'15px', backgroundColor: '#E2CAEB',  color:'white',marginBottom:'2px'}}> <Link style={{ textDecoration:'none', color:'white'}} href="/settings/edit"> 비밀번호 변경 </Link></p>
+        <p style={{ padding:'15px', backgroundColor: '#E2CAEB', color:'white'}}><Link style={{ textDecoration:'none', color:'white'}} href="/settings/disconnect"> 상대방과 연결 끊기 </Link></p>
       </div>
       <div style={{textAlign:'center'}}>
         <p style={{ padding:'7px', textDecoration:'underline', marginTop:'50px',color:'#C998DC'}}>회원탈퇴</p>

@@ -8,10 +8,10 @@ const Settings = () => {
       <h1 style={{ backgroundColor: '#E2CAEB', padding: '7px'}}>설정</h1> 
 
       <h2 style={{ backgroundColor: '#FDF9FF', padding: '9px', color:'#C998DC' }}>마이페이지</h2>
-      <p style={{margin:'8px', marginLeft:'7px', color:'#C399D3'}}><Link href="/settings/profile">마이페이지 관리</Link></p>
+      <p style={{margin:'8px', marginLeft:'7px', color:'#C399D3'}}><Link style={{textDecoration:'none'}} href="/settings/profile">마이페이지 관리</Link></p>
 
       <h2 style={{ backgroundColor: '#FDF9FF', padding: '7px', color:'#C998DC' }}>계좌</h2>
-      <p style={{margin:'8px', marginLeft:'7px', color:'#C399D3'}}><Link href="/settings/account">계좌연결</Link></p>
+      <p style={{margin:'8px', marginLeft:'7px', color:'#C399D3'}}><Link style={{textDecoration:'none'}} href="/settings/account">계좌연결</Link></p>
 
       <h2 style={{ backgroundColor: '#FDF9FF', padding: '7px', color:'#C998DC' }}>암호</h2>
       <p style={{margin:'8px', marginLeft:'7px', color:'#C399D3'}}>암호 설정하기</p><br/>

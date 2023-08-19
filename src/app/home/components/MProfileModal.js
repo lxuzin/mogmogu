@@ -66,7 +66,7 @@ const MProfileModal = ({ open, onClose, imageSrc }) => {
         </div>
         <div className={styles['profile-message']}
           style={{
-            marginTop: '25px',
+            marginTop: '15px',
             fontSize: '10px',
             color: '#633277' 
           }}>

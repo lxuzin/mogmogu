@@ -44,11 +44,7 @@ const FeedModal = ({ open, onClose, imageSrc }) => {
         }}
       />
       <div className={styles.lineContainer}>
-    <img src="/images/big_line.png" 
-    style={{
-      marginTop: '20%'
-    }}
-    className={styles.lineImage} />
+      <p>__________________________________________________</p>
   </div>
   <div className={styles.textContainer}>
     <div className={styles.centeredText}>
@@ -56,7 +52,7 @@ const FeedModal = ({ open, onClose, imageSrc }) => {
     </div>
   </div>
   <div className={styles.lineContainer}>
-    <img src="/images/big_line.png" className={styles.lineImage} />
+    <p>___________________________________________________</p>
   </div>
   <div className={styles.centerContainer}>
     <img
