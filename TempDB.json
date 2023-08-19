@@ -1,0 +1,56 @@
+{
+  "transactions" : [
+    
+    {
+      "id": 0,
+      "bank_id": 0,
+      "trans_date": "",
+      "trans_time": "",
+      "content": "",
+      "cost": 0,
+      "deposit": 0,
+      "balance": 0
+    }
+  ],
+  "banks" : [
+    {
+      "id": 0,
+      "bank_name": "",
+      "bank_account": ""
+    }
+
+  ],
+  "Users" : [
+    {
+      "id": 0,
+      "name": "",
+      "myImg": null,
+      "birthday": "",
+      "phone": "",
+      "nickname": "",
+      "password": "",
+      "password2": "",
+      "myCode": "",
+      "yourCode": "",
+      "avgcostpermonth": 0,
+      "avgnumpermonth": 0
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
