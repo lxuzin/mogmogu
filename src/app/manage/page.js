@@ -75,7 +75,7 @@ function Manage() {
   }
 
   return (
-    <div style={{overflow:'scroll'}}>
+    <div>
       <div>
         <div>
           <h4 style={{ font: 'initial', padding: '7px', marginTop: '8px' }}> | 우리의 저축 및 절약 현황 보러가기</h4>
