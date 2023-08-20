@@ -1,105 +1,124 @@
 import { useGlobalContext } from '@/app/Context/store';
 import Styles from '../NewContent.module.css'
 import MockStyles from './Mock.module.css';
-import { activities, foodCategory, korean } from '@/app/calendar/Utils/selections';
-import { useEffect } from 'react';
+import { activities, foodCategory, allFood } from '@/app/calendar/Utils/selections';
+import { useEffect, useState } from 'react';
 
-export default function MockDate({data}) {
+export default function MockDate({ data }) {
   const { maxcostPerDate, navIdx } = useGlobalContext();
-  const [ mockOpened, setMockOpened, content, setContent, category, setCategory, selectedActs, setSelectedActs, cost, setCost] = data;
+  const [species, setSpecies] = useState('korean');
+  const [mockOpened, setMockOpened, content, setContent, category, setCategory, selectedActs, setSelectedActs, cost, setCost] = data;
 
   useEffect(() => {
     selectedActs.forEach(act => {
-      const element = document.getElementById(act.name);
+      const element = document.getElementById(`bar-${act.name}`);
       element.style.width = `${act.cost / maxcostPerDate * 100}%`;
     });
-  }, [maxcostPerDate, category]);
-  // mock
+
+    console.log('page: ', category);
+
+    selectedActs.forEach(act => {
+      const selected_elements = document.querySelectorAll(`.${MockStyles.selected}`);
+      selected_elements.forEach(element => {
+        console.log('removed: ', element.id);
+        document.getElementById(element.id).classList.remove(MockStyles.selected);
+      });
+    });
+
+    selectedActs.forEach(act => {
+      const element = document.getElementById(act.name);
+      if (!element) return;
+      element.classList.add(MockStyles.selected);
+    });
+
+  }, [maxcostPerDate, category, selectedActs]);
+
   const handleMockActSelect = (e) => {
-    console.log(e.target.innerText);
+    e.target.classList.add(MockStyles.selected);
     const res = selectedActs.find(act => act.name === e.target.innerText);
     if (res) {
       setSelectedActs(selectedActs.filter(act => act.name !== e.target.innerText));
-      return ;
+      return;
     }
     setSelectedActs([...selectedActs, activities.find(act => act.name === e.target.innerText)]);
     setCategory('foodCategory');
   }
-
+  
   const handleMockFoodCategorySelect = (e) => {
-    const res = foodCategory.find(food => food.name === e.target.tag);
-    console.log(res);
+    e.target.classList.add(MockStyles.selected);
+    setSpecies(e.target.id);
     setCategory('foodSelection');
   }
-
+  
   const handleMockFoodSelect = (e) => {
-    console.log(e.target.innerText);
-    const res = selectedActs.find(act => act.name === e.target.innerText);
+    e.target.classList.add(MockStyles.selected);
+    const res = selectedActs.find(act => act.name === e.target.id);
     if (res) {
-      setSelectedActs(selectedActs.filter(act => act.name !== e.target.innerText));
-      return ;
+      setSelectedActs(selectedActs.filter(act => act.name !== e.target.id));
+      return;
     }
-    setSelectedActs([...selectedActs, activities.find(act => act.name === e.target.innerText)]);
-    setCategory('foodCategory');
+    setSelectedActs([...selectedActs, allFood[species].find(act => act.name === e.target.id)]);
   }
 
   return (
     <div className={Styles.contentWrapper}>
-    <div className={MockStyles.costIndicatorWrapper}>
-      <div className={MockStyles.costIndicator}>
+      <div className={MockStyles.costIndicatorWrapper}>
+        <div className={MockStyles.costIndicator}>
+          {
+            selectedActs.map((item, index) => (
+              <div className={MockStyles.costIndicatorItem}
+                key={`item-${index}`}
+                id={`bar-${item.name}`}>
+                {item.name}
+              </div>
+            ))
+          }
+        </div>
+        <p>하루적정지출금액 ({cost}/{maxcostPerDate})</p>
+      </div>
+      <div className={`${MockStyles.selectionWrapper}`}>
         {
-          /* 액티비티 + 식사 */
-          selectedActs.map((act, index) => (
-            <div className={MockStyles.costIndicatorItem}
-              key={index}
-              id={act.name}>
-              {act.name}
-            </div>
-          ))
+          category === 'activity' && (
+            activities.map((act, index) => (
+              <button
+                className={`${MockStyles.selection}`}
+                key={`${act.name}-${index}`}
+                id={act.name}
+                onClick={handleMockActSelect}
+              >{act.name}
+              </button>
+            )))
+        }
+        {
+          category === 'foodCategory' && (
+            foodCategory.map((food, index) => (
+              <button
+                className={`${MockStyles.selection} ${MockStyles.food}`}
+                key={`${food.name}-${index}`}
+                id={food.tag}
+                onClick={handleMockFoodCategorySelect}>
+                {food.name}
+                <img
+                  id={food.tag}
+                  src={food.imageUrl}
+                  alt={food.name}
+                />
+              </button>
+            )))
+        }
+        {
+          category === 'foodSelection' && (
+            allFood[species].map((food, index) => (
+              <button
+                className={`${MockStyles.selection}`}
+                key={`${food.name}-${index}`}
+                onClick={handleMockFoodSelect}
+                id={`${food.name}`}>
+                {food.name}
+              </button>
+            )))
         }
       </div>
-      <p>하루적정지출금액 ({cost}/{maxcostPerDate})</p>
     </div>
-    <div className={`${MockStyles.selectionWrapper}`}>
-      {
-        category === 'activity' && (
-          activities.map((act, index) => (
-            <button
-              className={`${MockStyles.selection} ${selectedActs.find(selected => selected.name === act.name) ? MockStyles.selected : ''}`}
-              key={`${act.name}-${index}`}
-              onClick={handleMockActSelect}
-            >{act.name}
-            </button>
-          )))
-      }
-      {
-        category === 'foodCategory' && (
-          foodCategory.map((food, index) => (
-            <button
-              className={`${MockStyles.selection} ${MockStyles.food} ${foodCategory.find(selected => selected.name === food.name) ? MockStyles.selected : ''}`}
-              key={`${food.name}-${index}`}
-              tag={food.tag}
-              onClick={handleMockFoodCategorySelect}
-            >{food.name}
-              <img
-                src={food.imageUrl}
-                alt={food.name}
-              />
-            </button>
-          )))
-      }
-      {
-        category === 'foodSelection' && (
-        korean.map((food, index) => (
-            <button
-              className={`${MockStyles.selection} ${korean.find(selected => selected.name === food.name) ? MockStyles.selected : ''}`}
-              key={`${food.name}-${index}`}
-              onClick={handleMockFoodSelect}
-              >{food.name}
-              </button>
-          )))
-      }
-    </div>
-  </div>
   );
 }
