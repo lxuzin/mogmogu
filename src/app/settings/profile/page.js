@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 
 const Profile = () => {
+
   const userProfile = {
     name: '김모앙',
     cp:'💜 이모아',
@@ -14,6 +15,7 @@ const Profile = () => {
     id2: 'moa1234@example.com',
     phone: '010-1230-0846',
   };
+  
 
   return (
     <div>
@@ -40,14 +42,14 @@ const Profile = () => {
         <p style={{margin:'10px'}}>
         <span style={{ color:'#C998DC', marginLeft:'20px'}}> 생일  </span> 
         <span style={{marginLeft:'45px'}}>{userProfile.birthday}</span></p> 
-        <img src="/pen.png" alt="" style={{ width: '13px', height: '13px', marginLeft: '100px' }} />
+        <img src="/pen.png" alt="" style={{ width: '13px', height: '13px', marginLeft: '140px' }} />
       </div>
       <hr/>
       <div >
       <p style={{margin:'10px'}}> 
         <span style={{color:'#C998DC', marginLeft:'20px'}}>성별  </span>
         <span style={{marginLeft:'45px'}}>{userProfile.gender}</span> 
-        <img src="/pen.png" alt="" style={{ width: '13px', height: '13px', marginLeft: '140px' }} />
+        <img src="/pen.png" alt="" style={{ width: '13px', height: '13px', marginLeft: '185px' }} />
       </p><hr/>
       <p style={{margin:'10px'}}> 
         <span style={{color:'#C998DC'}}>📩 계정  </span>

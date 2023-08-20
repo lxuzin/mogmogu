@@ -251,6 +251,7 @@ export default function Manage2(props) {
           <div className="box-container" style={{ marginTop: '10%' }}>
             <span style={{color: 'white'}}>지금까지 600,000원 모였어요</span>
             <div className="heart-container">
+              <span className="heart-text" style={{marginTop: '-45%'}}> </span>
               <span className="heart-text" style={{marginTop: '10%'}}>절약 60%</span>
               <span className="heart-text" style={{marginTop: '35%'}}>(600,000)</span>
               <img src="../images/heart_40.png" className="heart-image" />
@@ -261,7 +262,7 @@ export default function Manage2(props) {
             <img src="../images/hungry_bear.png" style={{marginLeft: '5%'}}/>
             <div className="bearbox" style={{backgroundColor: 'white', width: '50%', marginLeft: '5%'}}>
             <div className="boxcontent" style={{textAlign: 'center'}}>
-              <div style={{ fontSize: '10px', marginLeft: "5%", fontWeight: 'bold', color: 'black', marginTop: '6%' }}>현재 목표 달성 확률은 <sapn style={{color: '#A869C1'}}>70%</sapn>입니다!</div>
+              <div style={{ fontSize: '10px', marginLeft: "5%", fontWeight: 'bold', color: 'black', marginTop: '6%' }}>현재 목표 달성 확률은 <span style={{color: '#A869C1'}}>70%</span>입니다!</div>
               <div style={{ fontSize: '10px', marginLeft: "5%", fontWeight: 'bold', color: 'black', marginTop: '2%' }}>이벤트 목표 달성을 위해 달려보아요.🏃‍♀️🏃‍♀️</div>
             </div>
             </div>

@@ -13,6 +13,7 @@ import {
     BarChart
 } from 'recharts';
 
+
 const data = [
     { 요일: '월', 지난주지출: 34000, 이번주지출: 32760 },
     { 요일: '화', 지난주지출: 56000, 이번주지출: 30000 },
@@ -28,7 +29,6 @@ const detailedData = {
         { category: '노랑통닭 건대점', amount: 23000 },
         { category: 'GS25 뚝섬유원지점', amount: 7000 }
     ]
-    // ... 이하 요일별로 데이터 추가
 };
 
 
@@ -51,6 +51,9 @@ const Spend = () => {
 
     return (
         <div>
+            <div style={{marginTop:'12px', marginLeft:'12px'}}>
+               <img src="../images/back.png" />
+            </div>
             <div style={{margin:'15px'}}>
                 <p style={{font:'initial'}}> | 일주일 지출 </p>
                 <LineChart width={470} height={270} data={data} margin={{ top: 8, right: 30, left: 12, bottom: 10 }}>
@@ -67,8 +70,8 @@ const Spend = () => {
                 <hr/>
             </div>
             <div style={{margin:'18px'}}>
-                <p> 00,000원 </p>
-                <p style={{color:'blue', font:'initial', marginBottom:'10px'}}> 지난주 대비 00,000원 🔽 </p>
+                <p> 30,000원 </p>
+                <p style={{color:'blue', font:'initial', marginBottom:'10px'}}> 지난주 대비 26,000원 🔽 </p>
                 <hr/>
             </div>
             <div style={{margin:'20px'}}>

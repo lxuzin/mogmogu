@@ -20,6 +20,7 @@ function Manage() {
   useEffect(() => {
     Chart.register(LinearScale, CategoryScale);
   }, []);
+ 
 
   const boxStyle = {
     backgroundColor: 'rgba(201, 152, 220, 0.82)',
@@ -29,7 +30,7 @@ function Manage() {
     margin: '10px',
     color: 'white',
     display:'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   };
 
   const box = {
@@ -61,8 +62,8 @@ function Manage() {
   const colors = ['#C998DC', '#9EDC98', '#98A7DC', '#DC9898'];
 
     const pieData = [
-    { name: '목표 달성', value: 24 },
-    { name: '미달성', value: 76 },
+    { name: '목표 달성', value: 60 },
+    { name: '미달성', value: 40 },
   ];
 
   const COLORS = ['#9319C3', '#FFFFFF'];
@@ -81,11 +82,15 @@ function Manage() {
         </div>
         <div>
           <div style={boxStyle}>
-            <div>
-              <p style={box}> 일주년 기념 여행 ❤️‍🔥</p>
-              <p style={box}> 23.08.05 ~ 23.08.31</p>
-              <p style={box}> 목표 절약액까지 00.000원 !</p>
-            </div>
+              <div>
+                <Link style={{textDecoration:'none'}} href="/manage/manage2" passHref>
+                  <div className="boxcontent" >
+                  <div style={{ marginLeft:'20px',  color: 'white', marginTop: '10px' }}>일주년 기념 여행💖</div>
+                  <div style={{ marginLeft:'20px',  color: 'white', marginTop: '5px' }}>23.08.17~23.08.31</div>
+                  <div style={{ marginLeft:'20px',  color: 'white', marginTop: '5px' }}>목표 금액까지 400,000원!</div>
+                  </div>
+                </Link>
+              </div>
             <div style={{ position: 'relative' }}>
                 <PieChart width={80} height={80} >
                   <Pie
@@ -101,7 +106,7 @@ function Manage() {
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                       <Label
-                        value={`${pieData[0].value}%`} // 데이터 값 표시
+                        value={`${pieData[0].value}%`} 
                         position="center"
                         style={labelStyle}/>
                   </Pie>
@@ -112,7 +117,7 @@ function Manage() {
           <div style={{display:'flex'}}>
             <img src='/ahrm.png' alt='' style={{ marginLeft: '10px', width: '100px', height: '100px' }}></img>
               <div style={bubbleStyle}>
-                <p style={{ padding: '15px' }}>현재 목표 달성 확률은 70%입니다! 
+                <p style={{ padding: '15px' }}>현재 목표 달성 확률은 60%입니다! 
                 <br /> 절약 목표 달성을 위해 달려보아요🏃🏃
                 </p>
               </div>
@@ -128,11 +133,11 @@ function Manage() {
             <div style={{ font: 'initial' }}>
               <p style={{marginTop:'8px'}}>
                 <span> | 일주일 지출 </span>
-                <span style={{float:'right'}}> 000,000원 ▶️ </span>
+                <span style={{float:'right'}}> 286,430원 ▶️ </span>
               </p>
               <p> 
                 <span style={{color:'red', float:'left'}}>지난주 대비 00.000원 🔼 </span>
-                <span style={{color:'blue', float:'right'}}>지난주 대비 00.000원 🔽</span>
+                <span style={{color:'blue', float:'right'}}>지난주 대비 16,440원 🔽</span>
               </p> 
             </div>
           </div>
@@ -150,8 +155,8 @@ function Manage() {
           <p > | 이번 달 지출 금액</p>
           <p style={{marginLeft:'4px'}}>◀️ 8월 ▶️</p>
           <p style={{marginLeft:'5px', marginBottom:'15px'}}>
-            <span>총 000.000원</span>
-            <span style={{fontSize:'2px', color:'#9950B7', marginLeft:'15px'}}>지난달 이맘때보다 0만 원 절약했어요! </span>
+            <span>총 286,430원</span>
+            <span style={{fontSize:'2px', color:'#9950B7', marginLeft:'15px'}}>지난달 이맘때보다 4만 원 절약했어요! </span>
           </p>
           <BarChart width={440} height={67} data={db} margin={{top:5, right:20, bottom:10 }} layout="vertical">
           <CartesianGrid strokeDasharray="3 3"/>
@@ -175,10 +180,10 @@ function Manage() {
                           <td style={{fontSize:'small'}}>{db[0][key]}%</td>
                           </td>
                           <td>
-                              {key === '식당' && <span style={{marginLeft:'90px'}}>00,000원 </span>}
-                              {key === '카페' && <span style={{marginLeft:'90px'}}>00,000원</span>}
-                              {key === '취미여가' && <span style={{marginLeft:'90px'}}>00,000원</span>}
-                              {key === '기타' && <span style={{marginLeft:'90px'}}>00,000원</span>}
+                              {key === '식당' && <span style={{marginLeft:'90px'}}>140,000원 </span>}
+                              {key === '카페' && <span style={{marginLeft:'90px'}}>90,000원</span>}
+                              {key === '취미여가' && <span style={{marginLeft:'90px'}}>40,000원</span>}
+                              {key === '기타' && <span style={{marginLeft:'90px'}}>16,430원</span>}
                           </td>
                       </tr>
                   ))}

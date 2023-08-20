@@ -11,7 +11,7 @@ const Edit = () => {
   const customButtonStyle = {
     backgroundColor: '#C998DC',
     width: '270px',
-    height: '35px',
+    height: '45px',
     padding: '12px 24px',
     borderRadius: '9px',
     marginTop: '40px',
@@ -50,6 +50,7 @@ const Edit = () => {
   return (
     <div>
       <h1 style={{ backgroundColor: 'rgba(203, 161, 220, 0.57)', padding: '10px', color: 'white' }}>
+      <img style={{marginRight:'20px', height:'16px'}} src="../images/back.png" />
         비밀번호 변경
       </h1>
 
@@ -78,7 +79,7 @@ const Edit = () => {
           style={{ display: 'block', margin: '10px',  marginLeft:'40px',padding: '10px', width:'400px' }}
         />
         <button onClick={handleSaveClick} style={customButtonStyle}>
-          비밀번호 변경
+          <p style={{textAlign:'center', fontSize:'17px'}}>비밀번호 변경</p>
         </button>
       </div>
       {isModalOpen && (
