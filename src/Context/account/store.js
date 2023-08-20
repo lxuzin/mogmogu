@@ -17,13 +17,15 @@ export const AccountContextProvider = ({ children }) => {
     cost: 0,
     deposit: 0,
     balance: 0});
+  const [ transactions, setTransactions ] = useState([])
 
 
   return (
     <accountContext.Provider value={{
       date, setDate,
       datingCostList, setDatingCostList,
-      datingCostObject, setDatingCostObject
+      datingCostObject, setDatingCostObject,
+      transactions, setTransactions
     }}>
       {children}
     </accountContext.Provider>
