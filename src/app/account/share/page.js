@@ -47,7 +47,7 @@ export default function Share(props) {
             <div>{selectedBankName.accountNum}</div>
           </div>
           <div className="AccountBanckTotalCost">
-            {cost}
+            {totalCost}
             
           </div>
         </div>
