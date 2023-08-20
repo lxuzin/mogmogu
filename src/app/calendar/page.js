@@ -10,32 +10,51 @@ import { useGlobalContext } from '../Context/store';
 
 export default function CalendarPage() {
   const router = useRouter();
-  const { setNavIdx, calendarContents } = useGlobalContext();
+  const { setNavIdx } = useGlobalContext();
+
+  const [calendarContents, setCalendarContents] = useState([]);
 
   const [today, setToday] = useState(new Date());
   const [dateSelected, setDateSelected] = useState(today);
-  const [detail, setDetail] = useState(calendarContents.find(x => {
-    return x.startDate.toDateString() === today.toDateString();
-  }));
+  const [detail, setDetail] = useState(null);
+
+  useEffect(() => {
+    fetch('/api/calendar')
+      .then(res => res.json())
+      .then(data => {
+        for (let i = 0; i < data.length; i++) {
+          data[i].startDate = new Date(data[i].startDate);
+          data[i].endDate = new Date(data[i].endDate);
+        }
+        setCalendarContents(data);
+      });
+  }, []);
 
   useEffect(() => {
     setNavIdx(1);
     setDetail(calendarContents.find(x => {
-      return x.startDate.toDateString() === dateSelected.toDateString();
+      const detailImg = document.querySelector(`.${Styles.detailImage}`);
+      if (detailImg) {
+        detailImg.style.backgroundImage = `url(${x.image.base64})`;
+      }
+      return (new Date(x.startDate).toDateString() === dateSelected.toDateString());
     }));
-  }, [today, dateSelected])
+  }, [today, dateSelected, calendarContents, detail])
 
   const handleTileContent = ({ date, view }) => {
     if (view !== 'month')
       return null;
 
-    const content = calendarContents.find(x => formatDate(x.startDate) === formatDate(date));
+    const content = calendarContents.find(x => {
+      return formatDate(x.startDate) === formatDate(date);
+    });
     if (!content)
       return null;
     return (
       <CalendarContent
         cost={content.cost}
         keyword={content.keyword}
+        date={date}
       />
     );
   }
@@ -82,6 +101,7 @@ export default function CalendarPage() {
               <div className={Styles.detailDate}>
                 {getDetailPeriod(detail.startDate, detail.endDate)}
               </div>
+                <img width={'100%'} src={detail.image.base64} alt={detail.image.name} />
             </div>
           )
         }

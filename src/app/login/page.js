@@ -38,7 +38,7 @@ export default function Login(props) {
   return (
     <>
       <div className="loginbody">
-        <div className="loginImage"><img src="/login/whiteHeartLogo.png" alt="#" /></div>
+        <div className="loginImage"><a href="/home"><img src="/login/whiteHeartLogo.png" alt="#" /></a></div>
         <div className="loginImage"><img src="/login/profileLogo.png" alt="#" /></div>
         <form className="loginForm" onSubmit={handleLogin}>
           <input className="loginIdPassword" type="text" name="nickname" placeholder="아이디" autoComplete='off' />

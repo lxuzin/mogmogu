@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import MockDate from './Components/MockDate';
 import InputDate from './Components/InputDate';
 
-const categories = [ 'activity', 'foodCategory', 'foodSelection' ];
+const categories = ['activity', 'foodCategory', 'foodSelection'];
 
 export default function NewContent({ params: { date } }) {
   const { daysElapsed, calendarContents, setCalendarContents } = useGlobalContext();
@@ -28,7 +28,7 @@ export default function NewContent({ params: { date } }) {
     notFound();
 
   useEffect(() => {
-    
+
     setCost(selectedActs.reduce((acc, cur) => acc + cur.cost, 0));
   }, [content, cost, selectedActs, category]);
 
@@ -48,9 +48,17 @@ export default function NewContent({ params: { date } }) {
       alert('키워드를 입력해주세요');
       return;
     }
-    setCalendarContents([...calendarContents, content]);
-    setContent(emptyContent);
-    router.push('/calendar');
+
+    fetch('/api/calendar/add', {
+      method: 'POST',
+      body: JSON.stringify(content)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setContent(emptyContent);
+        router.push('/calendar');
+      });
   }
 
   return (
@@ -74,9 +82,9 @@ export default function NewContent({ params: { date } }) {
 
       {
         mockOpened ? (
-          <MockDate data={[mockOpened, setMockOpened, content, setContent, category, setCategory, selectedActs, setSelectedActs, cost, setCost]}/>
+          <MockDate data={[mockOpened, setMockOpened, content, setContent, category, setCategory, selectedActs, setSelectedActs, cost, setCost]} />
         ) : (
-          <InputDate data={[getDateDiff, mockOpened, setMockOpened, content, setContent ]} />
+          <InputDate data={[getDateDiff, mockOpened, setMockOpened, content, setContent]} />
         )
       }
       <button
