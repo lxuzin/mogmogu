@@ -9,6 +9,7 @@ export default function Manage2(props) {
   const [saveElementsData, setSaveElementsData] = useState([]);
   const [showSaveDetails1, setShowSaveDetails1] = useState(false);
   const [showSaveDetails2, setShowSaveDetails2] = useState(false);
+  const [showInformation, setShowInformation] = useState(false);
 
   const handleToggleSaveDetails1 = () => {
     setShowSaveDetails1(!showSaveDetails1);
@@ -267,6 +268,21 @@ export default function Manage2(props) {
               <div style={{ fontSize: '10px', marginLeft: "5%", fontWeight: 'bold', color: 'black', marginTop: '6%' }}>현재 목표 달성 확률은 <span style={{color: '#A869C1'}}>70%</span>입니다!</div>
               <div style={{ fontSize: '10px', marginLeft: "5%", fontWeight: 'bold', color: 'black', marginTop: '2%' }}>이벤트 목표 달성을 위해 달려보아요.🏃‍♀️🏃‍♀️</div>
             </div>
+            <img
+              src="/information_icon.png"
+              style={{ width: '7%', marginLeft: '90%' }}
+              onClick={() => {
+                setShowInformation(true);
+                setTimeout(() => setShowInformation(false), 1500); // Hide after 5 seconds
+              }}
+            />
+            {showInformation && (
+              <img
+                src="/information.png"
+                style={{ width: '100%' }}
+                alt="Information"
+              />
+            )}    
             </div>
           </div>
           <div className="button-container" style={{marginTop: '3%'}}>
