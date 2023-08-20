@@ -28,7 +28,7 @@ export default function Login(props) {
           cause: { resp }
         });
       }
-    router.push("/home")
+      router.push("/home")
 
     } catch (e) {
       alert("로그인 실패하였습니다. 정보를 확인하세요");
