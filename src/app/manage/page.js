@@ -1,49 +1,95 @@
 "use client"
-import React, { useEffect } from 'react';
-import { Chart, LinearScale, CategoryScale } from 'chart.js';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar, Label } from 'recharts';
+import React, { useEffect, useState } from 'react';
+import { default as axios } from 'axios';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label, Bar, BarChart } from 'recharts';
 import { PieChart, Pie, Cell } from 'recharts';
 import Link from 'next/link';
 
-const data = [
-  { 요일: '월', 지난주지출: 34000, 이번주지출: 32760 },
-  { 요일: '화', 지난주지출: 56000, 이번주지출: 30000 },
-  { 요일: '수', 지난주지출: 23000, 이번주지출: 27250 },
-  { 요일: '목', 지난주지출: 49870, 이번주지출: 67000 },
-  { 요일: '금', 지난주지출: 55000, 이번주지출: 51420 },
-  { 요일: '토', 지난주지출: 60000, 이번주지출: 50000 },
-  { 요일: '일', 지난주지출: 25000, 이번주지출: 28000 },
-];
-
 function Manage() {
-  useEffect(() => {
-    Chart.register(LinearScale, CategoryScale);
-  }, []);
+  const [lastWeekData, setLastWeekData] = useState([]);
+  const [thisWeekData, setThisWeekData] = useState([]);
+  const [selectedDayData, setSelectedDayData] = useState({});
+
 
 
   const handleApi = async () => {
-    const options = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    }
     try {
-      const resp = await fetch(process.env.NEXT_PUBLIC_API_URL + `account`, options);
-      if (!resp.ok) {
-        throw new Error("Bad response", {
-          cause: { resp }
-        })
-      }
-      const transactions = await resp.json();
-      console.log(transactions)
-    } catch (e) {
-      router.refresh();
+      const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + 'account');
+      const transactions = response.data;
+
+      const today = new Date();
+      const lastWeekStart = new Date(today);
+      lastWeekStart.setDate(today.getDate() - 13);
+      const lastWeekEnd = new Date(today);
+      lastWeekEnd.setDate(today.getDate() - 7);
+
+      const thisWeekStart = new Date(today);
+      thisWeekStart.setDate(today.getDate() - 6);
+
+      const lastWeek = transactions.filter(item => {
+        const date = new Date(item.date);
+        return date >= lastWeekStart && date <= lastWeekEnd;
+      });
+
+      const thisWeek = transactions.filter(item => {
+        const date = new Date(item.date);
+        return date >= thisWeekStart && date <= today;
+      });
+
+
+      setLastWeekData(lastWeek);
+      setThisWeekData(thisWeek);
+
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
-  }
+  };
+
   useEffect(() => {
-    handleApi()
-  }, [])
+    handleApi();
+  }, []);
+
+  const generateWeekData = (start, end, transactions) => {
+    const weekData = {};
+  
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+  
+    for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
+      const day = date.toLocaleString('en-US', { weekday: 'short' });
+      if (!weekData[day]) {
+        const dayTransactions = transactions.filter(item => new Date(item.date).getDate() === date.getDate());
+        weekData[day] = {
+          cost: dayTransactions.reduce((total, transaction) => total + transaction.cost, 0),
+        };
+      } else {
+        const dayTransactions = transactions.filter(item => new Date(item.date).getDate() === date.getDate());
+        weekData[day].cost += dayTransactions.reduce((total, transaction) => total + transaction.cost, 0);
+      }
+    }
+  
+    return weekData;
+  };
+
+  const lastWeekChartData = generateWeekData('2023-08-06', '2023-08-13', lastWeekData);
+  const thisWeekChartData = generateWeekData('2023-08-14', '2023-08-20', thisWeekData);
+  
+  const combinedChartData = Object.keys(lastWeekChartData).map(day => ({day,
+    lastWeekCost: lastWeekChartData[day].cost,
+    thisWeekCost: thisWeekChartData[day]?.cost || 0,
+    lastWeekDifference: thisWeekChartData[day]?.cost - lastWeekChartData[day].cost || 0,
+  }));
+
+  const handleChartClick = (data, index) => {
+    setSelectedDayData(combinedChartData[index]);
+  };
+
+
+  const lastWeekTotalExpenses = lastWeekData.reduce((total, transaction) => total + transaction.cost, 0);
+  const thisWeekTotalExpenses = thisWeekData.reduce((total, transaction) => total + transaction.cost, 0);
+
+
+
 
   const boxStyle = {
     backgroundColor: 'rgba(201, 152, 220, 0.82)',
@@ -96,6 +142,8 @@ function Manage() {
     font: 'initial',
     fill: 'black'
   }
+
+  
 
   return (
     <div>
@@ -156,30 +204,31 @@ function Manage() {
           <div style={{ font: 'initial' }}>
             <p style={{ marginTop: '8px' }}>
               <span> | 일주일 지출 </span>
-              <span style={{ float: 'right' }}> 286,430원 ▶️ </span>
-            </p>
-            <p>
-              <span style={{ color: 'red', float: 'left' }}>지난주 대비 00.000원 🔼 </span>
-              <span style={{ color: 'blue', float: 'right' }}>지난주 대비 16,440원 🔽</span>
+              <span style={{ marginLeft:'70%' }}> 지난주 대비 </span>
+              <span style={{ float: 'right', color: (thisWeekTotalExpenses - lastWeekTotalExpenses) < 0 ? 'blue' : 'red' }}>
+                {Math.abs(thisWeekTotalExpenses - lastWeekTotalExpenses).toLocaleString()} 원{' '}
+                {thisWeekTotalExpenses - lastWeekTotalExpenses < 0 ? '🔽' : '🔼'}
+              </span>
             </p>
           </div>
         </div>
-        <LineChart width={495} height={270} data={data} margin={{ top: 8, right: 30, left: 12, bottom: 10 }}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="요일" />
-          <YAxis hide />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="지난주지출" stroke="#DFDFDF" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="이번주지출" stroke="#C998DC" /></LineChart>
+        <LineChart width={495} height={270} data={combinedChartData} margin={{ top: 8, right: 30, left: 12, bottom: 10 }}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="day" />
+        <YAxis hide />
+        <Tooltip />
+        <Legend />
+        <Line dataKey="lastWeekCost" name="Last Week" stroke="lightgray" onClick={handleChartClick}/>
+        <Line dataKey="thisWeekCost" name="This Week" stroke="#C998DC" onClick={handleChartClick}/>
+        </LineChart>
       </div>
       <hr />
       <div style={{ font: 'initial' }}>
         <p > | 이번 달 지출 금액</p>
         <p style={{ marginLeft: '4px' }}>◀️ 8월 ▶️</p>
         <p style={{ marginLeft: '5px', marginBottom: '15px' }}>
-          <span>총 286,430원</span>
-          <span style={{ fontSize: '2px', color: '#9950B7', marginLeft: '15px' }}>지난달 이맘때보다 4만 원 절약했어요! </span>
+          <span>총 383,000원</span>
+          <span style={{ fontSize: '2px', color: '#9950B7', marginLeft: '15px' }}>지난달 이맘때보다 95,300원 더 썼어요! </span>
         </p>
         <BarChart width={440} height={67} data={db} margin={{ top: 5, right: 20, bottom: 10 }} layout="vertical">
           <CartesianGrid strokeDasharray="3 3" />
@@ -203,10 +252,10 @@ function Manage() {
                     <td style={{ fontSize: 'small' }}>{db[0][key]}%</td>
                   </td>
                   <td>
-                    {key === '식당' && <span style={{ marginLeft: '90px' }}>140,000원 </span>}
-                    {key === '카페' && <span style={{ marginLeft: '90px' }}>90,000원</span>}
-                    {key === '취미여가' && <span style={{ marginLeft: '90px' }}>40,000원</span>}
-                    {key === '기타' && <span style={{ marginLeft: '90px' }}>16,430원</span>}
+                    {key === '식당' && <span style={{ marginLeft: '90px' }}>191,500원 </span>}
+                    {key === '카페' && <span style={{ marginLeft: '90px' }}>114,900원</span>}
+                    {key === '취미여가' && <span style={{ marginLeft: '90px' }}>38,300원</span>}
+                    {key === '기타' && <span style={{ marginLeft: '90px' }}>38,300원</span>}
                   </td>
                 </tr>
               ))}
