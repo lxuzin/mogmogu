@@ -261,7 +261,7 @@ export default function Manage2(props) {
             <img src="../images/hungry_bear.png" style={{marginLeft: '5%'}}/>
             <div className="bearbox" style={{backgroundColor: 'white', width: '50%', marginLeft: '5%'}}>
             <div className="boxcontent" style={{textAlign: 'center'}}>
-              <div style={{ fontSize: '10px', marginLeft: "5%", fontWeight: 'bold', color: 'black', marginTop: '6%' }}>현재 목표 달성 확률은 <sapn style={{color: '#A869C1'}}>70%</sapn>입니다!</div>
+              <div style={{ fontSize: '10px', marginLeft: "5%", fontWeight: 'bold', color: 'black', marginTop: '6%' }}>현재 목표 달성 확률은 <span style={{color: '#A869C1'}}>70%</span>입니다!</div>
               <div style={{ fontSize: '10px', marginLeft: "5%", fontWeight: 'bold', color: 'black', marginTop: '2%' }}>이벤트 목표 달성을 위해 달려보아요.🏃‍♀️🏃‍♀️</div>
             </div>
             </div>
