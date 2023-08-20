@@ -4,10 +4,29 @@ const withPWA = require("next-pwa");
 
 const nextConfig = {
 	...withPWA({
-			dest: "public",
-			register: true,
-			skipWaiting: true,
+		dest: "public",
+		register: true,
+		skipWaiting: true,
 	}),
+	async headers() {
+		return [
+			{
+				// matching all API routes
+				source: "/api/:path*",
+				headers: [
+					{ key: "Access-Control-Allow-Credentials", value: "true" },
+					{ key: "Access-Control-Allow-Origin", value: "*" }, // replace this your actual origin
+					{ key: "Access-Control-Allow-Methods", value: "GET,DELETE,PATCH,POST,PUT" },
+					{ key: "Access-Control-Allow-Headers", value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" },
+				]
+			}
+		]
+	},
+	cors: {
+		origin: "*",
+		methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+		credentials: true
+	},
 };
 
 module.exports = nextConfig;

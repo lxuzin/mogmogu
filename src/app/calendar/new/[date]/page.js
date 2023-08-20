@@ -133,9 +133,8 @@ export default function NewContent({ params: { date } }) {
 
       {
         mockOpened ? (
-          <>
             <div className={Styles.contentWrapper}>
-              <div className={`${MockStyles.costIndicatorWrapper}`}>
+              <div className={MockStyles.costIndicatorWrapper}>
                 <div className={MockStyles.costIndicator}>
                   {
                     /* 액티비티 + 식사 */
@@ -194,7 +193,6 @@ export default function NewContent({ params: { date } }) {
                 }
               </div>
             </div>
-          </>
         ) : (
           <div className={Styles.contentWrapper}>
             <div className={`${Styles.contentInputWrapper}`}>
