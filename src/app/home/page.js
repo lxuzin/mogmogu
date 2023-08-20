@@ -99,18 +99,19 @@ const Home = () => {
             className={`${styles.right_image} ${styles.clickableImage}`}
             onClick={() => handleImage2Click('/images/kuromi_f.png')}
           />
-          <div className={styles.text}>이모아</div>
+          <div className={styles.text}>이모아</div>          
+          </div>
         </div>
-      </div>
-      <img
-        src="/images/logo.png"
-        alt="logo Image"
-        className={`${styles.logo} ${styles.clickableImage}`}
-        onClick={() => handleImage3Click('/images/logo.png')}
-      />
-      <div className={styles.AdWrapper}>
-      </div>
-      {modalOpen1 && (
+        <img
+            src="/images/logo.png"
+            alt="logo Image"
+            className={`${styles.logo} ${styles.clickableImage}`}
+            onClick={() => handleImage3Click('/images/logo.png')}
+          />
+        <div className={styles.AdWrapper}>
+          <img src="/images/advertisement.png" style={{width:'100%'}}/>
+        </div>
+        {modalOpen1 && (
         <div className={styles.modalOverlay}>
           <MProfileModal open={modalOpen1} onClose={closeModal1} imageSrc={selectedImage} />
         </div>
