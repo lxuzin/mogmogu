@@ -109,6 +109,7 @@ const Home = () => {
             onClick={() => handleImage3Click('/images/logo.png')}
           />
         <div className={styles.AdWrapper}>
+          <img src="/images/advertisement.png" style={{width:'100%'}}/>
         </div>
         {modalOpen1 && (
         <div className={styles.modalOverlay}>
