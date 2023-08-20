@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import MockDate from './Components/MockDate';
 import InputDate from './Components/InputDate';
 
-const categories = [ 'activity', 'food', 'foodSelection' ];
+const categories = [ 'activity', 'foodCategory', 'foodSelection' ];
 
 export default function NewContent({ params: { date } }) {
   const { daysElapsed, calendarContents, setCalendarContents } = useGlobalContext();
@@ -28,8 +28,9 @@ export default function NewContent({ params: { date } }) {
     notFound();
 
   useEffect(() => {
+    
     setCost(selectedActs.reduce((acc, cur) => acc + cur.cost, 0));
-  }, [content, cost, selectedActs]);
+  }, [content, cost, selectedActs, category]);
 
   const getDateDiff = (date1 = new Date(), date2 = new Date()) => {
     date1 = new Date(date1);

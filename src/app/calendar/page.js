@@ -8,9 +8,6 @@ import { useRouter } from 'next/navigation';
 import { formatDate, handleDday, week } from './Utils/calendar-utils';
 import { useGlobalContext } from '../Context/store';
 
-// import dynamic from 'next/dynamic'
-// const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
-
 export default function CalendarPage() {
   const router = useRouter();
   const { setNavIdx, calendarContents } = useGlobalContext();
