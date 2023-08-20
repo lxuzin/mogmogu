@@ -1,24 +1,25 @@
 "use client"
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import BankNameData from '@/../../Bankname.json';
+import { useGlobalContext } from '@/app/Context/store';
 
 const Account = () => {
   const userAccount = {
     ac1: '110-464-123456',
     ac2: '3333-12-3456789',
-    ac3 : '454123-45-67',
-    ac4 : '373-12-3456-79',
-    ac5 : '112-2569-8459-58',
+    ac3: '454123-45-67',
+    ac4: '373-12-3456-79',
+    ac5: '112-2569-8459-58',
   };
 
   const customButton = {
     backgroundColor: '#C998DC',
     width: '250px',
-    padding:'12px 24px',
+    padding: '12px 24px',
     borderRadius: '20px',
     marginTop: '5px',
     border: 'none',
-    color:'white'
+    color: 'white'
   };
 
   const button1 = {
@@ -26,23 +27,23 @@ const Account = () => {
     marginLeft: '10px',
     borderRadius: '6px',
     border: 'none',
-    color:'white',
-    padding:'2px',
-    width:'65px',
-    height:'30px',
-    marginLeft:'50px'
+    color: 'white',
+    padding: '2px',
+    width: '65px',
+    height: '30px',
+    marginLeft: '50px'
   };
 
   const button2 = {
     backgroundColor: '#C998DC',
     marginLeft: '20px',
     borderRadius: '6px',
-    border : 'none',
-    color:'white',
-    padding:'2px',
-    width:'70px',
-    height:'30px',
-    marginLeft:'50px'
+    border: 'none',
+    color: 'white',
+    padding: '2px',
+    width: '70px',
+    height: '30px',
+    marginLeft: '50px'
   };
 
   const button3 = {
@@ -50,11 +51,11 @@ const Account = () => {
     marginLeft: '10px',
     borderRadius: '6px',
     border: 'none',
-    color:'white',
-    padding:'2px',
-    width:'65px',
-    height:'30px',
-    marginLeft:'40px'
+    color: 'white',
+    padding: '2px',
+    width: '65px',
+    height: '30px',
+    marginLeft: '40px'
   };
 
   const modalStyle = {
@@ -68,13 +69,13 @@ const Account = () => {
     boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.1)',
     textAlign: 'center',
 
-    zIndex:1000,
-    minWidth:'300px',
-    width: '80%', 
-    maxHeight: '80%', 
+    zIndex: 1000,
+    minWidth: '300px',
+    width: '80%',
+    maxHeight: '80%',
     overflowY: 'auto',
   };
-  
+
   const modalButtonStyle = {
     backgroundColor: '#C998DC',
     border: 'none',
@@ -87,69 +88,89 @@ const Account = () => {
 
   const [selectedAccount, setSelectedAccount] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // 그냥 은행데이터 있다고 가정하고 가져오기.
+  const OriginBankNamaData = BankNameData.banks
+  // List
+  const [bankNameData, setBankNameData] = useState(OriginBankNamaData)
+  const { selectedBankName, setSelectedBankName} = useGlobalContext()
+  const [connetBankName, setConnetBankName] = useState(false)
+  // 사용 X
+  const [selectBankOption, setSelectBankOpiton] = useState({})
 
-  const handleFormSubmit = (event) => {
+  const selectBank = (idx) => {
+
+    // 기존 bank에서 빠지고 select로 가는거야.
+    // 1. 하나 가져와서 -> 2. bank네임에서 빼고 -> 3. selected에 넣는다.
+    const selectedbank = bankNameData.filter(item => item.id === idx)[0]
+    setSelectedBankName(selectedbank)
+
+    const updatebank = OriginBankNamaData.filter(item => item.id !== idx)
+    setBankNameData(prev => [...updatebank])
+    setIsModalOpen(true)
+  }
+
+  const handleSelectSubmit = (event) => {
     event.preventDefault();
-    console.log('Selected Account:', selectedAccount);
-    setIsModalOpen(true);
+    setSelectBankOpiton(event.target.value)
   };
 
-  
+  const handleConnectBankName = () => {
+    setConnetBankName(true)
+  }
+
+
 
   return (
     <div >
-      <h1 style={{ backgroundColor: 'rgba(203, 161, 220, 0.57)', padding: '10px', color:'white' }}>계좌 연결</h1>
-      <h3 style={{color: '#C998DC', padding:'9px'}}>연결 계좌</h3>
+      <h1 style={{ backgroundColor: 'rgba(203, 161, 220, 0.57)', padding: '10px', color: 'white' }}>계좌 연결</h1>
+      <h3 style={{ color: '#C998DC', padding: '9px' }}>연결 계좌</h3>
 
       <div style={{ display: 'flex', alignItems: 'center' }}>
+
+        {/*
         <label htmlFor="accountSelect" style={{ marginRight: '10px' }}>계좌 선택</label>
-        <select id="accountSelect" value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)}>
+         <select id="accountSelect" value={selectBankOption} onChange={handleSelectSubmit}>
           <option value="">계좌 선택</option>
-          <option value={userAccount.ac1}>신한은행 입출금 통장</option>
-          <option value={userAccount.ac2}>카카오뱅크 입출금 통장</option>
-          <option value={userAccount.ac5}>부산은행 입출금 통장</option>
-        </select>
-        <button type="submit" style={{ backgroundColor: '#E2CAEB', border: 'none', color: 'white', marginLeft: '12px', borderRadius: '5px', height:'20px', width:'50px' }}>연결</button>
+          {selectedBankName.map((bank, index) => (
+            <option key={index} value={bank.accountNum}>{bank.name}</option>
+          ))}
+        </select> */}
+        <button type="submit" style={{ backgroundColor: '#E2CAEB', border: 'none', color: 'white', marginLeft: '12px', borderRadius: '5px', height: '20px', width: '50px' }}>연결중..</button>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
+      {(Object.keys(selectedBankName).length !== 0) && <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/shin.jpg" alt="" style={{ width: '20px', height: '22px', marginLeft: '10px' }} />
-          <p style={{ marginLeft: '10px' , padding:'7px'}}>신한은행 입출금 통장 <br /> {userAccount.ac1}</p>
+          <img src={`/${selectedBankName.src}`} alt="" style={{ width: '20px', height: '22px', marginLeft: '10px' }} />
+          <p style={{ marginLeft: '10px', padding: '7px' }}>{selectedBankName.name}<br /> {selectedBankName.accountNum}</p>
           <button type='submit' style={button1}> 상세보기 </button>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', marginLeft: '10px' }}>
-          <img src="/kakao.jpg" alt="" style={{ width: '20px', height: '21px' }} />
-          <p style={{ marginLeft: '10px', padding:'7px' }}>카카오뱅크 입출금 통장 <br /> {userAccount.ac2}</p>
-          <button type='submit' style={button3}> 상세보기 </button>
-        </div>
-      </div>
+      </div>}
 
       <div >
-        <h3 style={{color: '#C998DC', padding:'9px'}}> 연결 추가</h3>
-
+        <h3 style={{ color: '#C998DC', padding: '9px' }}> 연결 추가</h3>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/rnrals.jpg" alt="" style={{ width: '20px', height: '17px', marginLeft: '10px' }} />
-          <p style={{ marginLeft: '10px', padding:'7px' }}>국민은행 입출금 통장 <br /> {userAccount.ac3}</p>
-          <button type='submit' style={button2} onClick={() => setIsModalOpen(true)}> 선택하기 </button>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', marginLeft: '10px' }}>
-          <img src="/rnrals.jpg" alt="" style={{ width: '20px', height: '21px' }} />
-          <p style={{ marginLeft: '10px', padding:'7px' }}>국민은행 입출금 통장 <br /> {userAccount.ac4}</p>
-          <button type='submit' style={button2} onClick={() => setIsModalOpen(true)}> 선택하기 </button>
+
+          {connetBankName && bankNameData.map((bank, index) => (
+            <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
+              <img src={`/${bank.src}`} alt="" style={{ width: '20px', height: '17px', marginLeft: '10px' }} />
+              <p style={{ marginLeft: '10px', padding: '7px' }}>{bank.name} <br /> {bank.accountNum}</p>
+              <button type='submit' style={button2} onClick={() => selectBank(bank.id)}> 선택하기 </button>
+            </div>
+          ))}
+
         </div>
       </div>
-      </div>
-      <div style={{marginLeft:'40px', marginTop:'15px'}}>
-        <button type='submit' style={customButton}> ➕ 계좌 연결 </button>
+      <div style={{ marginLeft: '40px', marginTop: '15px' }}>
+        <button style={customButton} onClick={handleConnectBankName}> ➕ 계좌 연결 </button>
       </div>
       {isModalOpen && (
         <div style={modalStyle}>
           <h3>새로운 계좌가 연결되었습니다 !</h3>
-          <img src='/mog.png' alt='' style={{maxWidth:'100%'}}/>
-          <p style={{color:'#C998DC', marginBottom:'8px'}}>이제 돈을 많이 '모앙'주세요 !</p>
-          <button style={modalButtonStyle} onClick={() => setIsModalOpen(false)}>닫기</button>
+          <img src='/mog.png' alt='' style={{ maxWidth: '100%' }} />
+          <p style={{ color: '#C998DC', marginBottom: '8px' }}>이제 돈을 많이 '모앙'주세요 !</p>
+          <button style={modalButtonStyle} onClick={() =>
+            setIsModalOpen(false)
+          }>닫기</button>
         </div>
       )}
     </div>

@@ -8,6 +8,7 @@ export const GlobalContextProvider = ({ children }) => {
   const [navIdx, setNavIdx] = useState(0);
   const [daysElapsed, setDaysElapsed] = useState('2023-01-01');
   const [calendarContents, setCalendarContents] = useState(contents);
+  const [selectedBankName, setSelectedBankName] = useState({})
 
   const value = {
     navIdx,
@@ -15,6 +16,8 @@ export const GlobalContextProvider = ({ children }) => {
     daysElapsed,
     calendarContents,
     setCalendarContents,
+    selectedBankName,
+    setSelectedBankName
   }
   return (
     <globalContext.Provider value={value}>

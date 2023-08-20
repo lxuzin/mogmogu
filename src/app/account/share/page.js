@@ -1,6 +1,7 @@
 'use client'
 import Modal from "@/Containers/account/share/Modal";
 import useAccountContext from "@/Context/account/store";
+import { useGlobalContext } from "@/app/Context/store";
 import { useState } from "react";
 
 export default function Share(props) {
@@ -8,6 +9,9 @@ export default function Share(props) {
     datingCostList, setDatingCostList,
     datingCostObject, setDatingCostObject } = useAccountContext();
 
+  const { selectedBankName } = useGlobalContext();
+
+  const totalCost = selectedBankName.transactions.reduce((total, transaction) => total + transaction.cost, 0);
 
   // 데이트 비용 공유버튼을 활성화해야한다.
   // 즉, 모달창을 띄워줘야 한다. zindex를 높게 설정해 준다.
@@ -39,11 +43,12 @@ export default function Share(props) {
         <div className="AccountBanckTopDiv">
           <div className="AccountBankDescription">
             <div><img src="/account/share/grayarrow.png" alt="" /></div>
-            <div>KB국민은행</div>
-            <div>123 456 7890</div>
+            <div>{selectedBankName.name}</div>
+            <div>{selectedBankName.accountNum}</div>
           </div>
           <div className="AccountBanckTotalCost">
-            279850 원
+            {cost}
+            
           </div>
         </div>
         <hr />

@@ -7,7 +7,10 @@ export default function Login(props) {
   const router = useRouter();
   const params = useParams();
 
-  const actionLogin = async (e) => {
+  const handleLogintemp = (e) => {
+    e.preventDefault();
+  }
+  const handleLogin = async (e) => {
     e.preventDefault();
     const nickname = e.target.nickname.value;
     const password = e.target.password.value;
@@ -24,8 +27,9 @@ export default function Login(props) {
         throw new Error("Bad response", {
           cause: { resp }
         });
-
       }
+    router.push("/home")
+
     } catch (e) {
       alert("로그인 실패하였습니다. 정보를 확인하세요");
       router.refresh();
@@ -36,7 +40,7 @@ export default function Login(props) {
       <div className="loginbody">
         <div className="loginImage"><img src="/login/whiteHeartLogo.png" alt="#" /></div>
         <div className="loginImage"><img src="/login/profileLogo.png" alt="#" /></div>
-        <form className="loginForm" onSubmit={actionLogin}>
+        <form className="loginForm" onSubmit={handleLogin}>
           <input className="loginIdPassword" type="text" name="nickname" placeholder="아이디" autoComplete='off' />
           <input className="loginIdPassword" type="password" name="password" placeholder="비밀번호" autoComplete='off' />
           <button className="loginBtn" type="submit">로그인</button>

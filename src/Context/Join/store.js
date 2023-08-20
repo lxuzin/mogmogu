@@ -17,6 +17,7 @@ export const JoinContextProvider = ({ children }) => {
     yourCode: "",
     avgcostpermonth: 0,
     avgnumpermonth: 0,
+    coupleStartDate: new Date()
   });
   return (
     <joinContext.Provider value={{ user, setUser, formNum, setFormNum }}>

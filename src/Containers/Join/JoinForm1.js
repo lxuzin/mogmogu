@@ -1,7 +1,7 @@
 import useJoinContext from "@/Context/Join/store";
 
 export default function JoinForm1() {
-  const {user, setUser, formNum, setFormNum} = useJoinContext();
+  const { user, setUser, formNum, setFormNum } = useJoinContext();
   /**
    * 정보 저장.
    * @param {*} e 
@@ -10,18 +10,19 @@ export default function JoinForm1() {
     e.preventDefault();
     setUser({
       ...user,
-      name : e.target.name.value,
-      birthday : e.target.birthday.value,
-      phone : e.target.phone.value,
-      nickname : e.target.nickname.value,
-      password : e.target.password.value,
-      password2 : e.target.password2.value,
+      name: e.target.name.value,
+      birthday: e.target.birthday.value,
+      phone: e.target.phone.value,
+      nickname: e.target.nickname.value,
+      password: e.target.password.value,
+      password2: e.target.password2.value,
     })
     console.log(user);
     setFormNum(2);
     console.log(formNum);
-
   };
+
+
   return (
     <>
       <div className="joinDown">
