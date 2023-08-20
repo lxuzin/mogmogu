@@ -6,9 +6,9 @@ const SelectMonth = ({ results }) => {
   const [listByDate, setListByDate] = useState([]);
 
   useEffect(() => {
-    fetch('/api/account')
-    .then(e => e.json())
-    .then(results => {
+    // fetch('/api/account')
+    // .then(e => e.json())
+    // .then(results => {
 
       for (let i = 1; i < 32; i++) {
         const perDate = results.filter(x => +(x.date.split("-")[2]) === i);
@@ -18,7 +18,7 @@ const SelectMonth = ({ results }) => {
         listByDate.push({ date: `2023-08-${i < 10 ? `0${i}` : i}`, list: perDate });
       }
       setListByDate([...listByDate]);
-    });
+    // });
   }, []);
 
   return (
