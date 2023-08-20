@@ -1,35 +1,34 @@
-const SelectDay = ({ results }) => {
+const randomImg = ['ahrm.png', 'gs.jpeg', 'kakao.jpg', 'mog.png', 'pen.png', 'profile-picture.jpg', 'rnrals.jpg', 'shfkd.jpeg', 'shin.jpg', 'znfhal.jpg'];
+
+const SelectDay = ({ item }) => {
   return (
     <>
-      <div className="AccountBankDetailsBottomOneOfContent">
-        <div className="AccountBankDetailsBottomOneStoreOfContent">
-          <img src="/account/share/imggs25.png" alt="" />
-          <p>GS25 뚝섬유원지점</p>
-        </div>
-        <p>3000</p>
-      </div>
-
-      <div className="AccountBankDetailsBottomOneOfContent2">
-        <div className="AccountBankDetailsBottomOneStoreOfContent">
-          <img src="/account/share/imgnotong.png" alt="" />
-          <p>노랑통닭 건대점</p>
-        </div>
-        <p>18000</p>
-      </div>
-
-      <div className="AccountBankDetailsBottomOneOfContent">
-        <div className="AccountBankDetailsBottomOneStoreOfContent">
-          <img src="/account/share/transimg.png" alt="" />
-          <p>교통 후불요금</p>
-        </div>
-        <p>14000</p>
-      </div>
+      {
+        item.list.map((item, index) => (
+          <div key={`${item.date}-${index}`}>
+            <div className="AccountBankDetailsBottomOneOfContent">
+              <div className="AccountBankDetailsBottomOneStoreOfContent">
+                <img width={'60px'} src={`/${randomImg[Math.floor(Math.random() * randomImg.length)]}`} alt="" />
+                {/* <img src={item.icon} alt="" /> */}
+                <p>{item.name}</p>
+              </div>
+              <p>{item.cost}</p>
+            </div>
+          </div>
+        ))
+      }
       <style jsx>{`
       .AccountBankDetailsBottomOneOfContent {
+        height: 60px;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  
+}
+
+.AccountBankDetailsBottomOneOfContent > img {
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
 }
 
 .AccountBankDetailsBottomOneOfContent2 {

@@ -17,7 +17,11 @@ const styles = css`
   }
 
   .spText {
-    color: #198cff;
+    color: #198cff !important;
+  }
+
+  .blackText {
+    color: #000 !important;
   }
 `;
 
@@ -38,7 +42,7 @@ export default function CalendarContent({ cost, keyword, date }) {
   return (
     <div className="calendar-content">
       {totalCost !== 0 && <div className="cost">{addCommas(totalCost)}</div>}
-      <div className={cost === 0 ? 'spText' : ''}>{keyword}</div>
+      <div className={totalCost === 0 ? 'spText' : 'blackText'}>{keyword}</div>
       <style jsx>{styles}</style>
     </div>
   )

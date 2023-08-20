@@ -12,7 +12,6 @@ export default function Share(props) {
     transactions, setTransactions } = useAccountContext();
 
   const { selectedBankName } = useGlobalContext();
-  console.log(selectedBankName.transactions)
 
   // const totalCost = selectedBankName.transactions.reduce((total, transaction) => total + transaction.cost, 0);
 
@@ -70,7 +69,7 @@ export default function Share(props) {
           </div>
 
           <div className="AccountBankDetailsBottom">
-            <SelectMonth results={selectedBankName.transactions} />
+            <SelectMonth results={transactions} />
           </div>
         </div>
       </div>

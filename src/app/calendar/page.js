@@ -7,6 +7,8 @@ import CalendarContent from './Components/CalendarContent';
 import { useRouter } from 'next/navigation';
 import { formatDate, handleDday, week } from './Utils/calendar-utils';
 import { useGlobalContext } from '../Context/store';
+import SearchIcon from '@mui/icons-material/Search';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 export default function CalendarPage() {
   const router = useRouter();
@@ -73,8 +75,8 @@ export default function CalendarPage() {
     <div className={Styles.calendarWrapper}>
       <Calendar
         tileContent={handleTileContent}
-        next2Label={null}
-        prev2Label={null}
+        next2Label={<SearchIcon />}
+        prev2Label={<SettingsIcon />}
         formatMonthYear={(locale, date) => `${date.getFullYear()}년 ${date.getMonth() + 1}월`}
         formatMonth={(locale, date) => `${date.getMonth() + 1}월`}
         formatShortWeekday={(locale, date) => week[date.getDay()]}
