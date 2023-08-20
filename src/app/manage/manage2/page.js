@@ -251,6 +251,7 @@ export default function Manage2(props) {
           <div className="box-container" style={{ marginTop: '10%' }}>
             <span style={{color: 'white'}}>지금까지 600,000원 모였어요</span>
             <div className="heart-container">
+              <span className="heart-text" style={{marginTop: '-45%'}}> </span>
               <span className="heart-text" style={{marginTop: '10%'}}>절약 60%</span>
               <span className="heart-text" style={{marginTop: '35%'}}>(600,000)</span>
               <img src="../images/heart_40.png" className="heart-image" />
