@@ -14,6 +14,10 @@ const styles = css`
   .content {
     font-size: 14px;
   }
+
+  .spText {
+    color: #198cff;
+  }
 `;
 
 function addCommas(number) {
@@ -23,8 +27,8 @@ function addCommas(number) {
 export default function CalendarContent({cost, keyword}) {
   return (
     <div className="calendar-content">
-      <div className="cost">{addCommas(cost)}</div>
-      <div>{keyword}</div>
+      { cost !== 0 && <div className="cost">{addCommas(cost)}</div>}
+      <div className={cost === 0 ? 'spText' : ''}>{keyword}</div>
       <style jsx>{styles}</style>
     </div>
   )

@@ -1,4 +1,4 @@
-export const week = ['월', '화', '수', '목', '금', '토', '일'];
+export const week = ['일', '월', '화', '수', '목', '금', '토'];
 
 export function handleDday(dateSelected) {
   const today = new Date();
@@ -18,5 +18,5 @@ export function formatDate (date = new Date()) {
 
 export function formatDateKR (date = new Date()) {
   const newDate = new Date(date);
-  return newDate.toLocaleDateString('ko-KR').replace(/ /g, '') + `(${week[newDate.getDay() - 1]})`;
+  return newDate.toLocaleDateString('ko-KR').replace(/ /g, '') + `(${week[newDate.getDay()]})`;
 }

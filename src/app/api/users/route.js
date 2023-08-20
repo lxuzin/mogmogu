@@ -1,60 +1,36 @@
 import { NextResponse } from "next/server";
-
+const fs = require('fs');
 
 /**
  * @User
- * nickname
- * password
- * monthCost
- * monthDateCnt
- * coupleStartDate
+ * [
+ *   {
+    nickname
+    password
+    monthCost
+    monthDateCnt
+    coupleStartDate
+ *  },
+ * ]
  */
-const users = [
-  {
-    nickname: 'test',
-    password: 'test',
-    monthCost: 100000,
-    monthDateCnt: 10,
-    coupleStartDate: new Date('2021-08-15'),
-  },
-];
 
 export async function GET(req) {
-  return NextResponse.json(users);
+  const read = fs.readFileSync('./public/data/users.json', 'utf8');
+  return NextResponse.json(read);
 }
 
 export async function POST(req) {
-  const user = await req.json();
+  const newUsers = await req.json();
 
-  // check user elements has value
-  if ( !user.nickname || !user.password || !user.monthCost || !user.monthDateCnt || !user.coupleStartDate) {
-    console.log(user);
-    return NextResponse.json(`
-      # user template
-      {
-        nickname: string,
-        password: string,
-        monthCost: number,
-        monthDateCnt: number,
-        coupleStartDate: Date,
-      }
-    `);
+  const flag = await newUsers.every(item => {
+    if (!item.nickname || !item.password || !item.monthCost || !item.monthDateCnt || !item.coupleStartDate)
+      return false;
+    return true;
+  });
+
+  if (!flag) {
+    return NextResponse.json({ error: 'invalid data' });
   }
-  if (users.find(x => x.nickname === user.nickname)) {
-    return NextResponse.json(`user already exists: ${user.email}`);
-  }
-  console.log(`new user: ${JSON.stringify(user)}`);
-  users.push(user);
-  return NextResponse.json(user);
+  fs.writeFileSync('./public/data/users.json', JSON.stringify(newUsers));
+  return NextResponse.json(newUsers);
 }
-
-
-const dummy = [
-  {
-    nickname: 'test',
-    password: 'test',
-    monthCost: 100000,
-    monthDateCnt: 10,
-    coupleStartDate: new Date('2021-08-15'),
-  }
-]

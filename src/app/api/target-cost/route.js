@@ -1,35 +1,35 @@
 import { NextResponse } from "next/server";
+const fs = require('fs');
 
 /**
  * @TargetCost
- * name
- * startDate
- * endDate
- * requiredCost
+ * [
+ *   {
+ *    name
+ *    startDate
+ *    endDate
+ *    requiredCost
+ *  },
+ * ]
  */
-const targetCosts = [];
 
 export async function GET(req) {
-  return NextResponse.json(targetCosts);
+  const read = fs.readFileSync('./public/data/target-cost.json', 'utf8');
+  return NextResponse.json(read);
 }
 
 export async function POST(req) {
-  const targetCost = await req.json();
-  console.log(targetCost);
+  const newTargetCost = await req.json();
 
-  // check user elements has value
-  if ( !targetCost.name || !targetCost.startDate || !targetCost.endDate || !targetCost.requiredCost) {
-    return NextResponse.json(`
-      # targetCost template
-      {
-        name: string,
-        startDate: Date,
-        endDate: Date,
-        requiredCost: number,
-      }
-    `);
+  const flag = await newTargetCost.every(item => {
+    if ( !item.name || !item.startDate || !item.endDate || !item.requiredCost)
+      return false;
+    return true;
+  });
+
+  if (!flag) {
+    return NextResponse.json({ error: 'invalid data' });
   }
-  console.log(`new targetCost: ${JSON.stringify(targetCost)}`);
-  users.push(targetCost);
-  return NextResponse.json(targetCost);
+  fs.writeFileSync('./public/data/target-cost.json', JSON.stringify(newTargetCost));
+  return NextResponse.json(newTargetCost);
 }

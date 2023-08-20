@@ -6,6 +6,7 @@ const globalContext = createContext({});
 
 export const GlobalContextProvider = ({ children }) => {
   const [navIdx, setNavIdx] = useState(0);
+  const [maxcostPerDate] = useState(70000);
   const [daysElapsed, setDaysElapsed] = useState('2023-01-01');
   const [calendarContents, setCalendarContents] = useState(contents);
 
@@ -15,6 +16,7 @@ export const GlobalContextProvider = ({ children }) => {
     daysElapsed,
     calendarContents,
     setCalendarContents,
+    maxcostPerDate,
   }
   return (
     <globalContext.Provider value={value}>
