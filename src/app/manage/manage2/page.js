@@ -146,12 +146,13 @@ export default function Manage2(props) {
               height: '80px',
               borderRadius: '10px',
               marginTop: '10px',
+              border:'none'
             }}>
             <div className="content-left">
               <div className="boxcontent">
                 <div style={{ fontSize: '15px', marginLeft: "5%", fontWeight: 'bold', color: 'white'}}>일주년 기념 여행💖</div>
                 <div style={{ fontSize: '15px', marginLeft: "5%", fontWeight: 'bold', color: 'white', marginTop: '0.5%' }}>23.08.17~23.08.31</div>
-                <div style={{ fontSize: '10px', marginLeft: "5%",  color: 'white', marginTop: '0.5%' }}>목표 금액까지 00.000원!</div>
+                <div style={{ fontSize: '10px', marginLeft: "5%",  color: 'white', marginTop: '0.5%' }}>목표 금액까지 400,000원!</div>
               </div>
             </div>
             <div className="content-right">
@@ -186,12 +187,13 @@ export default function Manage2(props) {
               height: '80px',
               borderRadius: '10px',
               marginTop: '10px',
+              border:'none'
             }}>
             <div className="content-left">
               <div className="boxcontent">
-                <div style={{ fontSize: '15px', marginLeft: "5%", fontWeight: 'bold', color: 'white'}}>일주년 기념 여행💖</div>
-                <div style={{ fontSize: '15px', marginLeft: "5%", fontWeight: 'bold', color: 'white', marginTop: '0.5%' }}>23.08.17~23.08.31</div>
-                <div style={{ fontSize: '10px', marginLeft: "5%",  color: 'white', marginTop: '0.5%' }}>목표 금액까지 00.000원!</div>
+                <div style={{ fontSize: '15px', marginLeft: "5%", fontWeight: 'bold', color: 'white'}}>같이 오사카가자~💖</div>
+                <div style={{ fontSize: '15px', marginLeft: "5%", fontWeight: 'bold', color: 'white', marginTop: '0.5%' }}>23.09.18~23.10.18</div>
+                <div style={{ fontSize: '10px', marginLeft: "5%",  color: 'white', marginTop: '0.5%' }}>목표 금액까지 500,000원!</div>
               </div>
             </div>
             <div className="content-right">
