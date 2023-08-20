@@ -9,6 +9,7 @@ export const GlobalContextProvider = ({ children }) => {
   const [maxcostPerDate] = useState(70000);
   const [daysElapsed, setDaysElapsed] = useState('2023-01-01');
   const [calendarContents, setCalendarContents] = useState(contents);
+  const [selectedBankName, setSelectedBankName] = useState({})
 
   const value = {
     navIdx,
@@ -17,6 +18,8 @@ export const GlobalContextProvider = ({ children }) => {
     calendarContents,
     setCalendarContents,
     maxcostPerDate,
+    selectedBankName,
+    setSelectedBankName
   }
   return (
     <globalContext.Provider value={value}>
