@@ -1,3 +1,4 @@
+import { useState } from "react";
 import css from "styled-jsx/css"
 
 const styles = css`
@@ -24,10 +25,19 @@ function addCommas(number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-export default function CalendarContent({cost, keyword}) {
+export default function CalendarContent({ cost, keyword, date }) {
+  const [totalCost, setCost] = useState(0);
+  fetch('/api/account')
+    .then(res => res.json())
+    .then(data => {
+      const perDate = data.filter(x => +(x.date.split("-")[2]) === new Date(date).getDate());
+      const totalCost = perDate.reduce((acc, cur) => acc + cur.cost, 0);
+      setCost(totalCost);
+    });
+
   return (
     <div className="calendar-content">
-      { cost !== 0 && <div className="cost">{addCommas(cost)}</div>}
+      {totalCost !== 0 && <div className="cost">{addCommas(totalCost)}</div>}
       <div className={cost === 0 ? 'spText' : ''}>{keyword}</div>
       <style jsx>{styles}</style>
     </div>

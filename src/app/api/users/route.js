@@ -16,7 +16,7 @@ const fs = require('fs');
 
 export async function GET(req) {
   const read = fs.readFileSync('./public/data/users.json', 'utf8');
-  return NextResponse.json(read);
+  return NextResponse.json(JSON.parse(read));
 }
 
 export async function POST(req) {
