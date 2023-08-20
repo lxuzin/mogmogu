@@ -254,6 +254,7 @@ export default function Manage2(props) {
           <div className="box-container" style={{ marginTop: '10%' }}>
             <span style={{color: 'white'}}>지금까지 600,000원 모였어요</span>
             <div className="heart-container">
+              <span className="heart-text" style={{marginTop: '-45%'}}> </span>
               <span className="heart-text" style={{marginTop: '10%'}}>절약 60%</span>
               <span className="heart-text" style={{marginTop: '35%'}}>(600,000)</span>
               <img src="../images/heart_40.png" className="heart-image" />
@@ -267,9 +268,24 @@ export default function Manage2(props) {
               <div style={{ fontSize: '10px', marginLeft: "5%", fontWeight: 'bold', color: 'black', marginTop: '6%' }}>현재 목표 달성 확률은 <span style={{color: '#A869C1'}}>70%</span>입니다!</div>
               <div style={{ fontSize: '10px', marginLeft: "5%", fontWeight: 'bold', color: 'black', marginTop: '2%' }}>이벤트 목표 달성을 위해 달려보아요.🏃‍♀️🏃‍♀️</div>
             </div>
+            <img
+              src="/information_icon.png"
+              style={{ width: '7%', marginLeft: '90%' }}
+              onClick={() => {
+                setShowInformation(true);
+                setTimeout(() => setShowInformation(false), 1500); // Hide after 5 seconds
+              }}
+            />
+            {showInformation && (
+              <img
+                src="/information.png"
+                style={{ width: '100%' }}
+                alt="Information"
+              />
+            )}    
             </div>
           </div>
-          <div className="button-container" style={{marginTop: '8%'}}>
+          <div className="button-container" style={{marginTop: '3%'}}>
             <button type="submit" style={{backgroundColor: 'white', width: '10%', marginLeft: '5%', marginTop: "1%", border: 'none', marginBottom:"2%"}} onClick={handleToggleSaveDetails1}>
               <span style={{fontSize: '15px',color: "black", fontWeight: 'bold'}}>저축</span>
             </button>
