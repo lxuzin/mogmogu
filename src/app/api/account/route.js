@@ -1,34 +1,35 @@
 import { NextResponse } from "next/server";
+const fs = require('fs');
 
 /**
  * @Account
- * date
- * cost
- * icon : img path
- * name
+ * [
+*   {
+ *    date
+ *    cost
+ *    icon : img path
+ *    name
+ *  },
+ * ]
  */
-const account = [];
 
 export async function GET(req) {
-  return NextResponse.json(item);
+  const read = fs.readFileSync('./public/data/account.json', 'utf8');
+  return NextResponse.json(read);
 }
 
 export async function POST(req) {
-  const item = await req.json();
+  const newAccount = await req.json();
 
-  // check calendar elements has value
-  if ( !item.date || !item.cost || !item.icon || !item.name) {
-    return NextResponse.json(`
-      # Account item template
-      {
-        date: Date,
-        cost: number,
-        icon: string,
-        name: string,
-      }
-    `);
+  const flag = await newAccount.every(item => {
+    if ( !item.date || !item.cost || !item.icon || !item.name)
+      return false;
+    return true;
+  });
+
+  if (!flag) {
+    return NextResponse.json({ error: 'invalid data' });
   }
-  console.log(`new item: ${JSON.stringify(item)}`);
-  account.push(item);
-  return NextResponse.json(item);
+  fs.writeFileSync('./public/data/account.json', JSON.stringify(newAccount));
+  return NextResponse.json(newAccount);
 }

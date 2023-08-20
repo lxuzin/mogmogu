@@ -25,13 +25,13 @@ export const activities = [
   { name: '맛집탐방', cost: 25000 },
 ];
 
-export const foods = [
-  { name: '한식', imageUrl: '/assets/images/food/korean.png' },
-  { name: '중식', imageUrl: '/assets/images/food/chinese.png' },
-  { name: '양식', imageUrl: '/assets/images/food/western.png' },
-  { name: '일식', imageUrl: '/assets/images/food/japanese.png' },
-  { name: '편의점/마트', imageUrl: '/assets/images/food/convenience.png' },
-  { name: '카페', imageUrl: '/assets/images/food/coffee.png' },
+export const foodCategory = [
+  { tag: 'korean', name: '한식', imageUrl: '/assets/images/food/korean.png' },
+  { tag: 'chinese', name: '중식', imageUrl: '/assets/images/food/chinese.png' },
+  { tag: 'western', name: '양식', imageUrl: '/assets/images/food/western.png' },
+  { tag: 'japanese', name: '일식', imageUrl: '/assets/images/food/japanese.png' },
+  { tag: 'convenience', name: '편의점/마트', imageUrl: '/assets/images/food/convenience.png' },
+  { tag: 'coffee', name: '카페', imageUrl: '/assets/images/food/coffee.png' },
 ];
 
 // 한식

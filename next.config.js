@@ -22,11 +22,6 @@ const nextConfig = {
 			}
 		]
 	},
-	cors: {
-		origin: "*",
-		methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-		credentials: true
-	},
 };
 
 module.exports = nextConfig;

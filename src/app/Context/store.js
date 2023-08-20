@@ -6,6 +6,7 @@ const globalContext = createContext({});
 
 export const GlobalContextProvider = ({ children }) => {
   const [navIdx, setNavIdx] = useState(0);
+  const [maxcostPerDate] = useState(70000);
   const [daysElapsed, setDaysElapsed] = useState('2023-01-01');
   const [calendarContents, setCalendarContents] = useState(contents);
   const [selectedBankName, setSelectedBankName] = useState({})
@@ -16,6 +17,7 @@ export const GlobalContextProvider = ({ children }) => {
     daysElapsed,
     calendarContents,
     setCalendarContents,
+    maxcostPerDate,
     selectedBankName,
     setSelectedBankName
   }
