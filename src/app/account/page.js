@@ -1,16 +1,65 @@
 'use client'
 
 import AccountCalendar from "@/Containers/account/AccountCalendar"
+import AccountDetail from "@/Containers/account/AccountDetail";
 import useAccountContext from "@/Context/account/store"
 import Link from "next/link";
+import { Router } from "next/router";
+import { useEffect, useState } from "react";
 
 export default function Account(props) {
   const { date, setDate,
     datingCostList, setDatingCostList,
-    datingCostObject, setDatingCostObject } = useAccountContext();
+    datingCostObject, setDatingCostObject,
+    transactions, setTransactions } = useAccountContext();
+  const [totalCost, setTotalCost] = useState(0);
+  const [todayCost, setTodayCost] = useState(0);
+  const [todayList, setTodayList] = useState([]);
   // 데이트를 기준으로 거래내역을 가져오고
   // 거래내역 중 +출금과 -입급 을 계산해서
   // 하루지출과 이번달 총 지출을 계산한다.
+  const handleApi = async () => {
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }
+    try {
+      const resp = await fetch(process.env.NEXT_PUBLIC_API_URL + `account`, options);
+      if (!resp.ok) {
+        throw new Error("Bad response", {
+          cause: { resp }
+        })
+      }
+      const results = await resp.json();
+      setTransactions(results);
+
+      const transaction = results;
+      let totalCost = 0;
+      let todayCost = 0;
+      const todayList = [];
+      for (let i = 0; i < transaction.length; i++) {
+        const trans = transaction[i];
+        totalCost += trans.cost;
+        if (new Date(trans.date).getDate() === new Date(date).getDate()) {
+          todayCost += trans.cost;
+          todayList.push(trans);
+        }
+      }
+      setTotalCost(totalCost)
+      setTodayCost(todayCost)
+      setTodayList(todayList)
+
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  useEffect(() => {
+    handleApi()
+  }, [date])
+
 
   return (
     <div className="AccountMogBody">
@@ -18,11 +67,11 @@ export default function Account(props) {
       <div className="AccountCostPayDiv">
         <div className="AccountCostTotal">
           <p className="AccountCostDescription">하루 지출</p>
-          <h1>1000000</h1>
+          <h1>{todayCost}</h1>
         </div>
         <div className="AccountCostDetail">
           <p className="AccountCostDescription">이번달 총지출</p>
-          <h2>488000</h2>
+          <h2>{totalCost}</h2>
           <p className="AccountCostDescription">하루 적정지출</p>
           <h2>30000</h2>
         </div>
@@ -42,23 +91,17 @@ export default function Account(props) {
       <hr />
       <div className="AccountMogDetailDiv">
         <div className="AccountMogContentDiv">
-          <div className="AccountMogContent">
 
-            <div className="AccountMogOneOfContent">
-              <div className="AccountMogOneStoreOfContent">
-                <img src="imggs25.png" alt="" />
-                <p>GS25 뚝섬유원지점</p>
-              </div>
-              <p>3000</p>
-            </div>
-          </div>
-          <div className="AccountMogNotContent"><br />
+          <AccountDetail results={todayList} />
+
+          {!todayList && <div className="AccountMogNotContent"><br />
             <h2>공유된 내역이 없습니다.</h2>
           </div>
+          }
         </div>
         <div>
           <button className="AccountDateCostShareBtn">
-            <Link style={{textDecorationLine: 'none', color: 'white'}} href="/account/share">데이트비용 공유</Link></button>
+            <Link style={{ textDecorationLine: 'none', color: 'white' }} href="/account/share">데이트비용 공유</Link></button>
         </div>
       </div>
       <style jsx>{`
@@ -156,22 +199,6 @@ export default function Account(props) {
       overflow: overlay;
     }
     
-    .AccountMogContent {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    .AccountMogOneOfContent {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-    }
-    
-    .AccountMogOneStoreOfContent {
-      display: flex;
-      justify-content: space-between;
-    }
     
     .AccountMogNotContent {
       display: flex;

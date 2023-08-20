@@ -85,13 +85,38 @@ const Account = () => {
     cursor: 'pointer',
   };
 
+  const [banks, setBanks] = useState([]);
+  const handleApi = async () => {
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }
+    try {
+      const resp = await fetch(process.env.NEXT_PUBLIC_API_URL + `bank`, options);
+      if (!resp.ok) {
+        throw new Error("Bad response", {
+          cause: { resp }
+        })
+      }
+      const results = await resp.json();
+      setBanks(results)
+      setBankNameData(results)
 
-  const [selectedAccount, setSelectedAccount] = useState('');
+    } catch (e) {
+      console.error(e)
+    }
+  }
+  useEffect(() => {
+    handleApi()
+    
+  }, [])
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   // 그냥 은행데이터 있다고 가정하고 가져오기.
-  const OriginBankNamaData = BankNameData.banks
   // List
-  const [bankNameData, setBankNameData] = useState(OriginBankNamaData)
+  const [bankNameData, setBankNameData] = useState([])
   const { selectedBankName, setSelectedBankName} = useGlobalContext()
   const [connetBankName, setConnetBankName] = useState(false)
   // 사용 X
@@ -104,7 +129,7 @@ const Account = () => {
     const selectedbank = bankNameData.filter(item => item.id === idx)[0]
     setSelectedBankName(selectedbank)
 
-    const updatebank = OriginBankNamaData.filter(item => item.id !== idx)
+    const updatebank = banks.filter(item => item.id !== idx)
     setBankNameData(prev => [...updatebank])
     setIsModalOpen(true)
   }
@@ -121,7 +146,7 @@ const Account = () => {
 
 
   return (
-    <div >
+    <div  >
       <h1 style={{ backgroundColor: 'rgba(203, 161, 220, 0.57)', padding: '10px', color: 'white' }}>계좌 연결</h1>
       <h3 style={{ color: '#C998DC', padding: '9px' }}>연결 계좌</h3>
 
@@ -135,10 +160,9 @@ const Account = () => {
             <option key={index} value={bank.accountNum}>{bank.name}</option>
           ))}
         </select> */}
-        <button type="submit" style={{ backgroundColor: '#E2CAEB', border: 'none', color: 'white', marginLeft: '12px', borderRadius: '5px', height: '20px', width: '50px' }}>연결중..</button>
       </div>
 
-      {(Object.keys(selectedBankName).length !== 0) && <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+      {(Object.keys(selectedBankName).length !== 0) && <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <img src={`/${selectedBankName.src}`} alt="" style={{ width: '20px', height: '22px', marginLeft: '10px' }} />
           <p style={{ marginLeft: '10px', padding: '7px' }}>{selectedBankName.name}<br /> {selectedBankName.accountNum}</p>
@@ -148,7 +172,7 @@ const Account = () => {
 
       <div >
         <h3 style={{ color: '#C998DC', padding: '9px' }}> 연결 추가</h3>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
           {connetBankName && bankNameData.map((bank, index) => (
             <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
@@ -160,7 +184,7 @@ const Account = () => {
 
         </div>
       </div>
-      <div style={{ marginLeft: '40px', marginTop: '15px' }}>
+      <div style={{ marginTop: '15px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <button style={customButton} onClick={handleConnectBankName}> ➕ 계좌 연결 </button>
       </div>
       {isModalOpen && (
