@@ -105,7 +105,7 @@ export default function Manage2(props) {
           </div>
           <div className="box-container" style={{ marginTop: '10%' }}>
             <div className="heart-container">
-              <span className="heart-text" style={{marginTop: '-45%'}}>절약 40% (00,000)</span>
+              <span className="heart-text" style={{marginTop: '-45%'}}> </span>
               <span className="heart-text" style={{marginTop: '10%'}}>절약 60%</span>
               <span className="heart-text" style={{marginTop: '35%'}}>(00,000)</span>
               <img src="../images/heart_40.png" className="heart-image" />

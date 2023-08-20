@@ -14,20 +14,20 @@ const Settings = () => {
       <p style={{margin:'8px', marginLeft:'7px', color:'#C399D3'}}><Link style={{textDecoration:'none'}} href="/settings/account">계좌연결</Link></p>
 
       <h2 style={{ backgroundColor: '#FDF9FF', padding: '7px', color:'#C998DC' }}>암호</h2>
-      <p style={{margin:'8px', marginLeft:'7px', color:'#C399D3'}}>암호 설정하기</p><br/>
-      <p style={{margin:'8px', marginLeft:'7px', color:'#C399D3'}}>암호 변경하기</p>
+      <p style={{margin:'8px', marginLeft:'7px', color:'purple'}}>암호 설정하기</p><br/>
+      <p style={{margin:'8px', marginLeft:'7px', color:'purple'}}>암호 변경하기</p>
 
       <h2 style={{ backgroundColor: '#FDF9FF', padding: '7px', color:'#C998DC' }}>알림</h2>
-      <p style={{margin:'8px', marginLeft:'7px', color:'#C399D3'}}>알림 설정</p><br/>
-      <p style={{margin:'8px', marginLeft:'7px', color:'#C399D3'}}>알림 소리</p>
+      <p style={{margin:'8px', marginLeft:'7px', color:'purple'}}>알림 설정</p><br/>
+      <p style={{margin:'8px', marginLeft:'7px', color:'purple'}}>알림 소리</p>
 
       <h2 style={{ backgroundColor: '#FDF9FF', padding: '7px', color:'#C998DC' }}>구독</h2>
-      <p style={{margin:'8px', marginLeft:'7px', color:'#C399D3'}}>구독 정보</p><br/>
-      <p style={{margin:'8px', marginLeft:'7px', color:'#C399D3'}}>구독 관리</p>
+      <p style={{margin:'8px', marginLeft:'7px', color:'purple'}}>구독 정보</p><br/>
+      <p style={{margin:'8px', marginLeft:'7px', color:'purple'}}>구독 관리</p>
 
       <h2 style={{ backgroundColor: '#FDF9FF', padding: '7px', color:'#C998DC' }}>캘린더</h2>
-      <p style={{margin:'8px', marginLeft:'7px', color:'#C399D3'}}>공휴일 설정</p><br/>
-      <p style={{margin:'8px', marginLeft:'7px', color:'#C399D3'}}>기능 설정</p>
+      <p style={{margin:'8px', marginLeft:'7px', color:'purple'}}>공휴일 설정</p><br/>
+      <p style={{margin:'8px', marginLeft:'7px', color:'purple'}}>기능 설정</p>
 
     </div>
   );
