@@ -15,12 +15,9 @@ export default function MockDate({ data }) {
       element.style.width = `${act.cost / maxcostPerDate * 100}%`;
     });
 
-    console.log('page: ', category);
-
     selectedActs.forEach(act => {
       const selected_elements = document.querySelectorAll(`.${MockStyles.selected}`);
       selected_elements.forEach(element => {
-        console.log('removed: ', element.id);
         document.getElementById(element.id).classList.remove(MockStyles.selected);
       });
     });
@@ -38,9 +35,11 @@ export default function MockDate({ data }) {
     const res = selectedActs.find(act => act.name === e.target.innerText);
     if (res) {
       setSelectedActs(selectedActs.filter(act => act.name !== e.target.innerText));
+      content.place.replace(e.target.innerText, '');
       return;
     }
     setSelectedActs([...selectedActs, activities.find(act => act.name === e.target.innerText)]);
+    content.place += e.target.innerText + " ";
     setCategory('foodCategory');
   }
   
@@ -55,9 +54,11 @@ export default function MockDate({ data }) {
     const res = selectedActs.find(act => act.name === e.target.id);
     if (res) {
       setSelectedActs(selectedActs.filter(act => act.name !== e.target.id));
+      content.food.replace(e.target.id, '');
       return;
     }
     setSelectedActs([...selectedActs, allFood[species].find(act => act.name === e.target.id)]);
+    content.food += e.target.id + " ";
   }
 
   return (

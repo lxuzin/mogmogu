@@ -7,6 +7,7 @@
 .calendar {
   background: linear-gradient(0deg, #ddd 0%, #fff 1%);
   height: 600px;
+  max-height: 80vh;
 }
 
 .details {
@@ -75,4 +76,13 @@
 .react-calendar__navigation__label {
   font-size: 20px;
   font-weight: 500;
+}
+
+.detailImage {
+  width: 100%;
+  margin: 10px 0 0 0;
+  border-radius: 5px;
+  background-image: url('/assets/images/icons/heart.svg');
+  background-size: cover;
+  background-position: center;
 }

@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 const fs = require('fs');
 
-
 /**
  * @Calendar
  *  {
- *    dateStart
- *    dateEnd
+    * keyword
+ *    startDate
+ *    endDate
  *    cost
  *    food
  *    place
@@ -14,10 +14,17 @@ const fs = require('fs');
  *  },
  */
 
+export async function GET() {
+  const account = JSON.parse(fs.readFileSync('./public/data/account.json', 'utf8'));
+  return NextResponse.json(account.filter(x => x.startDate === '2023-08-20'));
+}
+
 export async function POST(req) {
+
   const item = await req.json();
-  if (!item.dateStart || !item.dateEnd || !item.cost || !item.food || !item.place || !item.diary)
+  if (!item.startDate || !item.endDate || !item.food || !item.place || !item.diary || !item.keyword) {
     return NextResponse.json({ error: 'invalid data' });
+  }
 
   const read = fs.readFileSync('./public/data/calendar.json', 'utf8');
   const calendar = await JSON.parse(read);

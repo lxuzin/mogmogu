@@ -5,8 +5,8 @@ const fs = require('fs');
  * @Calendar
  * [
  *  {
- *    dateStart
- *    dateEnd
+ *    startDate
+ *    endDate
  *    cost
  *    food
  *    place
@@ -17,14 +17,14 @@ const fs = require('fs');
 
 export async function GET(req) {
   const read = fs.readFileSync('./public/data/calendar.json', 'utf8');
-  return NextResponse.json(read);
+  return NextResponse.json(JSON.parse(read));
 }
 
 export async function POST(req) {
   const calendar = await req.json();
 
   const flag = await calendar.every(item => {
-    if (!item.dateStart || !item.dateEnd || !item.cost || !item.food || !item.place || !item.diary)
+    if (!item.startDate || !item.endDate || !item.food || !item.place || !item.diary|| !item.keyword)
       return false;
     return true;
   });
