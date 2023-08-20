@@ -4,6 +4,8 @@ import { createContext, useContext, useState } from "react";
 
 const accountContext = createContext({});
 export const AccountContextProvider = ({ children }) => {
+
+
   const [date, setDate] = useState(new Date());
   const [datingCostList, setDatingCostList] = useState([]);
   const [datingCostObject, setDatingCostObject] = useState({

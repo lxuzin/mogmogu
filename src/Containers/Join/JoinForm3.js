@@ -1,3 +1,4 @@
+'use client'
 import useJoinContext from "@/Context/Join/store";
 import { useRouter } from "next/navigation";
 
@@ -14,26 +15,34 @@ export default function JoinForm3() {
       yourCode: e.target.yourCode.value,
     })
     console.log(user);
-    await actionJoin();
+    await handleJoin();
+  };
+
+  const member = {
+    nickname: user.nickname,
+    password: user.password,
+    monthCost: user.avgcostpermonth,
+    monthDateCnt: user.avgnumpermonth,
+    coupleStartDate: user.coupleStartDate
   };
 
 
-  const actionJoin = async (e) => {
+  const handleJoin = async (e) => {
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify(member),
     }
     try {
-      const resp = await fetch(process.env.API_URL + 'join', options);
+      const resp = await fetch(process.env.NEXT_PUBLIC_API_URL +`users`, options);
       if (!resp.ok) {
         throw new Error("Bad response", {
           cause: { resp }
         })
       }
-      const member = await resp.json();
+      const members = await resp.json();
       setFormNum(1);
       alert("회원가입을 축하합니다.")
       router.push("/home")
