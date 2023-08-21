@@ -6,31 +6,31 @@ const randomImg = ['ahrm.png', 'gs.jpeg', 'kakao.jpg', 'mog.png', 'pen.png', 'pr
 const SelectDay = ({ item }) => {
   const { selectDayCost, setSelectDayCost } = useAccountContext()
   const [selectIndexList, setSelectIndexList] = useState([])
-  const handleButton = (selectItem) => {
+
+  const handleButton = (selectItem, e) => {
+    e.target.classList.toggle('selected-detail');
     setSelectDayCost(prev => {
       for (let i = 0; i < prev.length; i++) {
         if (prev[i] == selectItem) {
-          alert("이미 선택되었습니다.")
-          return [...prev]
+          return prev.filter((item) => item !== selectItem)
         }
       }
       return [...prev, selectItem]
     })
     // setSelectIndexList((prev)=>[...prev, index])
     // console.log(selectIndexList)
-    console.log(selectDayCost)
   };
-
+  
   useEffect(() => {
-
-  }, [selectIndexList])
+    console.log(selectDayCost)
+  }, [ selectDayCost])
 
   return (
     <>
       <div className="AccountBankDetailsBottomOne">
         {
           item.list.map((i, index) => (
-            <button key={`${i.date}-${index}`} className="AccountBankDetailsBottomOneButton" onClick={() => { handleButton(i) }}>
+            <button key={`${i.date}-${index}`} className="AccountBankDetailsBottomOneButton" onClick={(e) => { handleButton(i, e) }}>
               <div className="AccountBankDetailsBottomOneOfContent">
                 <div className="AccountBankDetailsBottomOneStoreOfContent">
                   {/* <img width={'60px'} src={`/${randomImg[Math.floor(Math.random() * randomImg.length)]}`} alt="" /> */}
@@ -44,9 +44,15 @@ const SelectDay = ({ item }) => {
         }
       </div>
       <style jsx>{`
-      .ok {
+      .selected-detail {
         background-color: #C998DC;
+        color: white;
       }
+
+      .selected-detail > div > p {
+        color: white;
+      }
+
       .AccountBankDetailsBottomOne {
         margin: 5%;
       }
