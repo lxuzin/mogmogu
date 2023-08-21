@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Calendar from "react-calendar";
 import Styles from './Calendar.module.css'
 import "./MoangCalendar.css";
@@ -13,6 +13,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 export default function CalendarPage() {
   const router = useRouter();
   const { setNavIdx } = useGlobalContext();
+  const calendarWrapper = useRef(null);
 
   const [calendarContents, setCalendarContents] = useState([]);
 
@@ -42,6 +43,10 @@ export default function CalendarPage() {
       return (new Date(x.startDate).toDateString() === dateSelected.toDateString());
     }));
   }, [today, dateSelected, calendarContents, detail])
+  
+  useEffect(() => {
+    document.querySelector('body > div ').scrollTo(0, document.querySelector('body > div').scrollHeight);
+  }, [dateSelected]);
 
   const handleTileContent = ({ date, view }) => {
     if (view !== 'month')
@@ -72,7 +77,7 @@ export default function CalendarPage() {
   }
 
   return (
-    <div className={Styles.calendarWrapper}>
+    <div className={Styles.calendarWrapper} ref={calendarWrapper}>
       <Calendar
         tileContent={handleTileContent}
         next2Label={<SearchIcon />}
@@ -103,7 +108,10 @@ export default function CalendarPage() {
               <div className={Styles.detailDate}>
                 {getDetailPeriod(detail.startDate, detail.endDate)}
               </div>
-                <img width={'100%'} src={detail.image.base64} alt={detail.image.name} />
+              <img width={'100%'} src={detail.image.base64} alt={detail.image.name} />
+              <div className={Styles.detailText}>🌭 {detail.food}</div>
+              <div className={Styles.detailText}>🏖️ {detail.place}</div>
+              <div className={Styles.detailText}>📔 {detail.diary}</div>
             </div>
           )
         }

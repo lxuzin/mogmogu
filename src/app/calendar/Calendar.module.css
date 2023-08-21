@@ -7,13 +7,13 @@
 .calendar {
   background: linear-gradient(0deg, #ddd 0%, #fff 1%);
   height: 600px;
-  max-height: 80vh;
+  min-height: 80vh;
 }
 
 .details {
   height: calc(100% - 600px);
   width: 100%;
-  background: linear-gradient(180deg, #ddd 0%, #fff 5%);
+  background: linear-gradient(180deg, #ddd 0%, #fff 2%);
   padding: 25px;
 }
 
@@ -71,6 +71,12 @@
   font-size: 14px;
   font-weight: 300;
   color: #999;
+}
+
+.detailText {
+  margin: 10px 0 0 0;
+  font-size: 20px;
+  font-weight: 900;
 }
 
 .react-calendar__navigation__label {
