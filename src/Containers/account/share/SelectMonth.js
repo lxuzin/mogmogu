@@ -9,7 +9,7 @@ const SelectMonth = ({ results }) => {
     // fetch('/api/account')
     // .then(e => e.json())
     // .then(results => {
-
+    if (results) {
       for (let i = 1; i < 32; i++) {
         const perDate = results.filter(x => +(x.date.split("-")[2]) === i);
         if (perDate.length === 0)
@@ -18,6 +18,7 @@ const SelectMonth = ({ results }) => {
         listByDate.push({ date: `2023-08-${i < 10 ? `0${i}` : i}`, list: perDate });
       }
       setListByDate([...listByDate]);
+    }
     // });
   }, []);
 

@@ -22,15 +22,17 @@ export async function GET(req) {
 export async function POST(req) {
   const newUsers = await req.json();
 
-  const flag = await newUsers.every(item => {
-    if (!item.nickname || !item.password || !item.monthCost || !item.monthDateCnt || !item.coupleStartDate)
-      return false;
-    return true;
-  });
-
-  if (!flag) {
-    return NextResponse.json({ error: 'invalid data' });
-  }
+  // const flag = newUsers.every(item => {
+  //   if (!item.nickname || !item.password || !item.monthCost || !item.monthDateCnt || !item.coupleStartDate) {
+  //     console.log("맞아?")
+  //     return false;
+  //   }
+    
+  //   return true;
+  // });
+  // if (!flag) {
+    // return NextResponse.json({ error: 'invalid data' });
+  // }
   fs.writeFileSync('./public/data/users.json', JSON.stringify(newUsers));
   return NextResponse.json(newUsers);
 }

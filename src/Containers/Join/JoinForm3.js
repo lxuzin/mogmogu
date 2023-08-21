@@ -14,20 +14,21 @@ export default function JoinForm3() {
       myCode: e.target.myCode.value,
       yourCode: e.target.yourCode.value,
     })
-    console.log(user);
     await handleJoin();
   };
 
-  const member = {
-    nickname: user.nickname,
-    password: user.password,
-    monthCost: user.avgcostpermonth,
-    monthDateCnt: user.avgnumpermonth,
-    coupleStartDate: user.coupleStartDate
-  };
+
 
 
   const handleJoin = async (e) => {
+    const member = {
+      nickname: user.nickname,
+      password: user.password,
+      monthCost: user.avgcostpermonth,
+      monthDateCnt: user.avgnumpermonth,
+      coupleStartDate: user.coupleStartDate
+    };
+    
     const options = {
       method: 'POST',
       headers: {

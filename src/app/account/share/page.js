@@ -69,7 +69,7 @@ export default function Share(props) {
           </div>
 
           <div className="AccountBankDetailsBottom">
-            <SelectMonth results={transactions} />
+            <SelectMonth results={selectedBankName.transactions} />
           </div>
         </div>
       </div>

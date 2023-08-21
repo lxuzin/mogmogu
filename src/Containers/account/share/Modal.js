@@ -1,6 +1,39 @@
+import useAccountContext from "@/Context/account/store";
+import { useRouter } from "next/navigation";
 
 
 const Modal = ({ closeModal }) => {
+  const router = useRouter();
+  const { selectDayCost, setSelectDayCost } = useAccountContext()
+  const { transactions, setTransactions } = useAccountContext();
+
+
+  const handleShareBtn = async () => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify([...transactions, ...selectDayCost]),
+    }
+    try {
+      const resp = await fetch(process.env.NEXT_PUBLIC_API_URL +`account`, options);
+      if (!resp.ok) {
+        throw new Error("Bad response", {
+          cause: { resp }
+        })
+      }
+      const account  = await resp.json();
+      setTransactions(account)
+      router.push("/account");
+      alert("등록 되었습니다.")
+
+
+    } catch (e) {
+    }
+    setSelectDayCost([]);
+    closeModal()
+  };
   return (
     <>
       <div className="modal">
@@ -11,7 +44,7 @@ const Modal = ({ closeModal }) => {
             <button className="close-btn" onClick={closeModal}>
               취소
             </button>
-            <button className="share-btn" onClick={closeModal}>
+            <button className="share-btn" onClick={() => {handleShareBtn()}}>
               공유
             </button>
           </div>

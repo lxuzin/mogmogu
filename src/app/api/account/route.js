@@ -21,15 +21,15 @@ export async function GET(req) {
 export async function POST(req) {
   const newAccount = await req.json();
 
-  const flag = await newAccount.every(item => {
-    if ( !item.date || !item.cost || !item.icon || !item.name)
-      return false;
-    return true;
-  });
+  // const flag = await newAccount.every(item => {
+  //   if ( !item.date || !item.cost || !item.icon || !item.name)
+  //     return false;
+  //   return true;
+  // });
 
-  if (!flag) {
-    return NextResponse.json({ error: 'invalid data' });
-  }
+  // if (!flag) {
+  // return NextResponse.json({ error: 'invalid data' });
+  // }
   fs.writeFileSync('./public/data/account.json', JSON.stringify(newAccount));
   return NextResponse.json(newAccount);
 }

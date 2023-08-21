@@ -12,9 +12,7 @@ export default function JoinForm2() {
       avgnumpermonth: e.target.avgnumpermonth.value,
       coupleStartDate: e.target.coupleStartDate.value,
     })
-    console.log(user);
     setFormNum(3);
-    console.log(formNum);
 
   };
   return (

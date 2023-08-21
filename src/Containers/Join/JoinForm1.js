@@ -17,9 +17,7 @@ export default function JoinForm1() {
       password: e.target.password.value,
       password2: e.target.password2.value,
     })
-    console.log(user);
     setFormNum(2);
-    console.log(formNum);
   };
 
 

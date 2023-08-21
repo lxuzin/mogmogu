@@ -18,6 +18,7 @@ export const AccountContextProvider = ({ children }) => {
     deposit: 0,
     balance: 0});
   const [ transactions, setTransactions ] = useState([])
+  const [ selectDayCost, setSelectDayCost ] = useState([])
 
 
   return (
@@ -25,7 +26,8 @@ export const AccountContextProvider = ({ children }) => {
       date, setDate,
       datingCostList, setDatingCostList,
       datingCostObject, setDatingCostObject,
-      transactions, setTransactions
+      transactions, setTransactions,
+      selectDayCost, setSelectDayCost
     }}>
       {children}
     </accountContext.Provider>

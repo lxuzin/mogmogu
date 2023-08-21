@@ -20,7 +20,6 @@ export default function JoinUp() {
    */
   const handleUpload = (e) => {
     const selectedFile = e.target.files[0];
-    console.log(selectedFile.name)
     if (selectedFile && isImageFile(selectedFile)) {
       const reader = new FileReader();
       reader.onload = (event) => {
@@ -44,8 +43,6 @@ export default function JoinUp() {
       ...user,
       myImg: fileContent,
     })
-    console.log(user);
-
   };
   return (
     <>

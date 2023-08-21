@@ -11,7 +11,6 @@ import { useRouter } from "next/navigation";
 export default function Join(props) {
   const { user, formNum, setFormNum } = useJoinContext();
   const router = useRouter()
-  console.log(user);
 
 
   return (
