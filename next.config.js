@@ -25,6 +25,5 @@ const nextConfig = {
 };
 
 module.exports = {
-	assetPrefix: '/mogmogu/',
 	output: 'export',
   };
