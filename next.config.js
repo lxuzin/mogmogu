@@ -24,4 +24,8 @@ const nextConfig = {
 	},
 };
 
-module.exports = nextConfig;
+module.exports = {
+	basePath: '/mogmogu',
+	assetPrefix: '/mogmogu/',
+	output: 'export',
+  };

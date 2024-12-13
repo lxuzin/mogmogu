@@ -1,0 +1,33 @@
+name: Deploy Next.js to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]  # main 브랜치에 push할 때마다 실행
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16' # 프로젝트에 맞는 Node 버전 선택
+
+      - name: Install dependencies
+        run: npm install
+
+      # Next.js 빌드 명령어 실행
+      # output: 'export' 설정으로 npm run build 시 out 폴더 생성
+      - name: Build
+        run: npm run build
+
+      # peaceiris/actions-gh-pages 액션을 사용해 out 폴더 내용을 gh-pages 브랜치로 푸시
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
